@@ -1,0 +1,202 @@
+<script>
+
+  // |||||||||||||||||||| CALCULATE EVERYTHING ||||||||||||||||
+  if('{{student.payment_method}}' == 'School_Fees_Aside'){
+    '{% for i in student_pay%}'
+    '{% if forloop.last %}'
+    document.getElementById('debt').defaultValue = '{{i.depth}}'
+    '{% endif %}'
+    '{% endfor %}'
+  }
+  function trying(){
+    const SCHOOL_FEES = 3;
+    // const CANTEEN = 2;
+    const BUSS_ADAMSU = 3;
+    const ADAMSU_ALL_NCON = 6;
+    const ADAMSU_WALK_NCON = 3;
+    const BUSS_MPUASU = 4;
+    const MPUASU_ALL_NCON = 7;
+
+    const BUSS_KOFITIA = 5;
+    const KOFITIA_ALL_NCON = 8;
+    const ADAMSU_ALL_NCON_ASA = 3;
+    const ADAMSU_WALK_NCON_ASA  = 2;
+    const MPUASU_ALL_NCON_ASA  = 4;
+    const KOFITIA_ALL_NCON_ASA  = 5;
+
+
+    // const SCHOOL_FEES = 3;
+    // const CANTEEN = 2;
+    // const BUSS_ADAMSU = 2;
+    // const ADAMSU_ALL_NCON = 7;
+    // const ADAMSU_WALK_NCON = 5;
+    // const BUSS_MPUASU = 3;
+    // const MPUASU_ALL_NCON = 8;
+
+    // const BUSS_KOFITIA = 4;
+    // const KOFITIA_ALL_NCON = 9;
+    // const ADAMSU_ALL_NCON_ASA = 4;
+    // const ADAMSU_WALK_NCON_ASA  = 2;
+    // const MPUASU_ALL_NCON_ASA  = 5;
+    // const KOFITIA_ALL_NCON_ASA  = 6;
+
+
+    const ALL_PERCENT = 100;
+
+    const ENTERED = document.getElementById('main_amount');
+    const FOOD = document.getElementById('food');
+    const CAR = document.getElementById('car');
+    const FEES = document.getElementById('fees');
+    const MAIN_VALUE = parseFloat(ENTERED.value);
+    const RESIDENCE = '{{student.residence}}';
+    const TRANSPORTATION = '{{student.form_of_transportation}}';
+    const METHOD = '{{student.payment_method}}';
+    const CATEGORY = '{{student.payment_category}}';
+    const BALANCE = '{{student.balance}}';
+    const DEPT = document.getElementById('dept');
+    if( METHOD == 'Pay_Per_Day' ){
+      if(RESIDENCE == 'Adamsu'){
+        // ||||||||||||| FROM ADAMSU AND PAY EVERYTHING |||||||||||||||||||||||||
+        if(CATEGORY == 'Pay_Everything'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss, school_fees] = [(CANTEEN/ADAMSU_ALL_NCON)*ALL_PERCENT, (BUSS_ADAMSU/ADAMSU_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_ALL_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
+          }    
+        }else if(CATEGORY == 'Considered'){
+          if(TRANSPORTATION == 'Bus'){           
+            let[canteen, buss, school_fees] = [(CANTEEN/ADAMSU_ALL_NCON)*ALL_PERCENT, (BUSS_ADAMSU/ADAMSU_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_ALL_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;             
+          }
+        }
+      }else if(RESIDENCE == 'Mpuasu' || RESIDENCE == 'Dwenem' || RESIDENCE == 'Bodaa'){
+        if(CATEGORY == 'Pay_Everything'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss, school_fees] = [(CANTEEN/MPUASU_ALL_NCON)*ALL_PERCENT, (BUSS_MPUASU/MPUASU_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/MPUASU_ALL_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;       
+          }
+        }else if(CATEGORY == 'Considered'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss, school_fees] = [(CANTEEN/MPUASU_ALL_NCON)*ALL_PERCENT, (BUSS_MPUASU/MPUASU_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/MPUASU_ALL_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
+          }
+        }
+      }else if(RESIDENCE == 'Kofitia' || RESIDENCE == 'Adiokor1' || RESIDENCE == 'Adiokor2' || RESIDENCE == 'Zezera' || RESIDENCE == 'Kwamepim'){
+        // COMEBACK TO U
+        if(CATEGORY == 'Pay_Everything'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss, school_fees] = [(CANTEEN/KOFITIA_ALL_NCON)*ALL_PERCENT, (BUSS_KOFITIA/KOFITIA_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/KOFITIA_ALL_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+            if (MAIN_VALUE % 9 == 0 || MAIN_VALUE % 3 == 0){
+            FEES.value = Math.round((school_fees/ALL_PERCENT)*MAIN_VALUE);
+            }else{
+              FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
+            }
+          }else if(TRANSPORTATION == 'Walk'){
+            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;          
+            }
+        }else if(CATEGORY == 'Considered'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss, school_fees] = [(CANTEEN/KOFITIA_ALL_NCON)*ALL_PERCENT, (BUSS_KOFITIA/KOFITIA_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/KOFITIA_ALL_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
+          }
+        }
+      }
+    }else if( METHOD == 'School_Fees_Aside'){
+      if(RESIDENCE == 'Adamsu'){
+        // ||||||||||||| FROM ADAMSU AND PAY EVERYTHING |||||||||||||||||||||||||
+        if(CATEGORY == 'Pay_Everything'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss] = [(CANTEEN/ADAMSU_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_ADAMSU/ADAMSU_ALL_NCON_ASA)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            FOOD.value = MAIN_VALUE;              
+          }    
+        }else if(CATEGORY == 'Considered'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss] = [(CANTEEN/ADAMSU_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_ADAMSU/ADAMSU_ALL_NCON_ASA)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+          }
+        }
+      }else if(RESIDENCE == 'Mpuasu' || RESIDENCE == 'Dwenem' || RESIDENCE == 'Bodaa'){
+        if(CATEGORY == 'Pay_Everything'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss] = [(CANTEEN/MPUASU_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_MPUASU/MPUASU_ALL_NCON_ASA)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+          }
+        }else if(CATEGORY == 'Considered'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss] = [(CANTEEN/MPUASU_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_MPUASU/MPUASU_ALL_NCON_ASA)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+          }
+        }
+      }else if(RESIDENCE == 'Kofitia' || RESIDENCE == 'Adiokor1' || RESIDENCE == 'Adiokor2' || RESIDENCE == 'Zezera' || RESIDENCE == 'Kwamepim'){
+        if(CATEGORY == 'Pay_Everything'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss] = [(CANTEEN/KOFITIA_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_KOFITIA/KOFITIA_ALL_NCON_ASA)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+          }
+        }else if(CATEGORY == 'Considered'){
+          if(TRANSPORTATION == 'Bus'){
+            let[canteen, buss] = [(CANTEEN/KOFITIA_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_KOFITIA/KOFITIA_ALL_NCON_ASA)*ALL_PERCENT];
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
+          }else if(TRANSPORTATION == 'Walk'){
+            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
+            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
+          }
+        }
+      }
+    }
+  }
+
+</script>
