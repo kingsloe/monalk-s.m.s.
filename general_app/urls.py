@@ -4,8 +4,6 @@ from .views import (
     aboutus_view,
     send_email_view,
     login_view,
-    admin_homepage_view,
-    student_homepage_view,
     singup_options_view,
 )
 from admin_app.views import admin_homepage_view
