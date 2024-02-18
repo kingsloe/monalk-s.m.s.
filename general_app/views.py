@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from students_app.models import *
+from students_app.models import StudentInfo
 # Create your views here.
 
 

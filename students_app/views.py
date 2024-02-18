@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import *
+from .forms import (
+    StudentUserInfoForm, 
+    OutsideStudentInfoForm
+)
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from notice_app.models import Notice
@@ -42,7 +45,6 @@ def student_homepage_view(request):
         status=True, user_id=request.user.id)
     notice = Notice.objects.all()
     method = studentdata[0].payment_method == 'School_Fees_Aside'
-    print(method)
 
     context = {
         'name': studentdata[0].get_name,

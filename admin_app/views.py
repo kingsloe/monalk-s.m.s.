@@ -62,7 +62,6 @@ def admin_homepage_view(request):
 @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_notice_view(request):
-    # form = NoticeForm()
     if request.method == 'POST':
         form = NoticeForm(request.POST)
         if form.is_valid():

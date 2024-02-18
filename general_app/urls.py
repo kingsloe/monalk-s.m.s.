@@ -1,5 +1,13 @@
 from django.urls import path
-from .views import *
+from .views import (
+    homepage_view,
+    aboutus_view,
+    send_email_view,
+    login_view,
+    admin_homepage_view,
+    student_homepage_view,
+    singup_options_view,
+)
 from admin_app.views import admin_homepage_view
 from students_app.views import student_homepage_view
 from django.contrib.auth.views import LogoutView

@@ -1,12 +1,38 @@
 from unicodedata import name
 from django.urls import path
-from .views import *
+from .views import (
+     admin_homepage_view, 
+     admin_teacher_homepage_view,
+     admin_view_all_teachers_view, 
+     admin_update_individual_teacher_info_view, 
+     admin_add_teacher_view, 
+     admin_approve_teachers_view,
+     admin_student_homepage_view,
+     admin_view_all_students_view,
+     admin_add_student_view,
+     admin_approve_students_view,
+     admin_approve_or_decline_student_view,
+     admin_view_individual_student_info_view,
+     admin_update_individual_student_info_view,
+     admin_students_to_pay_view,
+     admin_student_daily_payment_view,
+     admin_view_records_of_payment_view,
+     admin_view_history_of_daily_total_payment_view,
+     admin_daily_paid_students_view,
+     admin_delete_daily_paid_student_view,
+     admin_delete_payment_from_student_profile_view,
+     admin_students_to_pay_termly_view,
+     admin_student_termly_payment_view,
+     admin_termly_paid_students_view,
+     admin_delete_termly_paid_student_view,
+     admin_records_of_all_schoolfees_payment_view,
+     admin_students_with_debt_view,
+     admin_notice_view,
+     delete_notice_view)
 
 urlpatterns = [
     path('homepage/', admin_homepage_view, name='admin_homepage'),
 
-    # ||||||||||||||||||||||| ALL ABOUT THE TEACHERS |||||||||||||||||||||||||||||||
-    # ||||||||||||||||||||||| ALL ABOUT THE TEACHERS |||||||||||||||||||||||||||||||
     # ||||||||||||||||||||||| ALL ABOUT THE TEACHERS |||||||||||||||||||||||||||||||
     path('teacher-view/', admin_teacher_homepage_view,
          name='admin_teacher_homepage'),
@@ -17,12 +43,8 @@ urlpatterns = [
     path('add-teacher/', admin_add_teacher_view, name='admin_add_teacher'),
     path('approve-teachers/', admin_approve_teachers_view,
          name='admin_approve_teachers'),
+    # ||||||||||||||||||||||| END ALL ABOUT THE TEACHERS |||||||||||||||||||||||||||||||
 
-    # ||||||||||||||||||||||| END ALL ABOUT THE TEACHERS |||||||||||||||||||||||||||||||
-    # ||||||||||||||||||||||| END ALL ABOUT THE TEACHERS |||||||||||||||||||||||||||||||
-    # ||||||||||||||||||||||| END ALL ABOUT THE TEACHERS |||||||||||||||||||||||||||||||
-    # ||||||||||||||||||||||| ALL ABOUT THE STUDENTS |||||||||||||||||||||||||||||||
-    # ||||||||||||||||||||||| ALL ABOUT THE STUDENTS |||||||||||||||||||||||||||||||
     # ||||||||||||||||||||||| ALL ABOUT THE STUDENTS |||||||||||||||||||||||||||||||
     path('student-view/', admin_student_homepage_view,
          name='admin_student_homepage'),
