@@ -288,7 +288,6 @@ def admin_view_individual_student_info_view(request, pk):
         else:
             messages.error(request, 'Could not delete student')
             return redirect('admin_view_individual_student_info', pk)
-        # elif 'delete_payment' in request.POST:
 
     context = {
         'student': student,
@@ -368,7 +367,7 @@ def admin_student_daily_payment_view(request, pk):
         # ======================== RESET PAYMENT ========================#
         # ======================== RESET PAYMENT ========================#
         if payment_form.is_valid():
-            deb = payment_form.cleaned_data['depth']
+            deb = payment_form.cleaned_data['debt']
             bala = payment_form.cleaned_data['balance']
             student.daily_balance = bala
             student.daily_debt = deb

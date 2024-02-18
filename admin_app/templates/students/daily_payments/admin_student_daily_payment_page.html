@@ -47,13 +47,13 @@
             </div>
             <div class="form-group">
               <p><b>Debt</b></p>
-              <input name="depth" type="number" step="any" class="form-control" id="debt" placeholder="Debt" required>
+              <input name="debt" type="number" step="any" class="form-control" id="debt" placeholder="Debt" required>
             </div>
             {% for i in student_pay %}
               {% if forloop.last %}
               <div class="balnarea">
                 <h3>ML: {{i.balance}}</h3>
-                <h3 id="debbt">AR: {{i.depth}}</h3>
+                <h3 id="debbt">AR: {{i.debt}}</h3>
               </div>
               {% endif %}
             {% endfor %}
@@ -68,9 +68,8 @@
   // |||||||||||||||||||| CALCULATE EVERYTHING ||||||||||||||||
     '{% for i in student_pay %}'
       '{% if forloop.last %}'
-        document.getElementById('debt').defaultValue = '{{i.depth}}'
+        document.getElementById('debt').defaultValue = '{{i.debt}}'
         document.getElementById('balance').defaultValue = '{{i.balance}}'
-        console.log('{{i.depth}}')
       '{% endif %}'
     '{% endfor %}'
   function trying(){

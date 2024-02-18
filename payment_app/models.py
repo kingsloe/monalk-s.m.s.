@@ -12,7 +12,5 @@ class Payment(models.Model):
     schoolfees = models.FloatField(null=True, blank=True, default=0)
     when_made = models.DateField(blank=True, null=True)
     balance = models.FloatField(null=True)
-    depth = models.FloatField(null=True)
+    debt = models.FloatField(null=True)
 
-    # def __str__(self):
-    #     return self.student

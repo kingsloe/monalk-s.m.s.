@@ -135,10 +135,10 @@
 	<h3 style="color: #41532a;" id="calculated"></h3>
 
 	{% for record in payment_record %}
-	{% if forloop.last %}
+	{% if forloop.first %}
 
 	<h3 style="color: #41532a;">BALANCE: {{record.balance}}</h3>
-	<h3 class="areas">ARREAS: {{record.depth}}</h3>
+	<h3 class="areas">ARREARS: {{record.debt}}</h3>
 	{% endif %}
 	{% endfor %}
 </div>
@@ -176,15 +176,14 @@
 			{% else %}
 			<td class="tablestyle"><strong>{{record.balance|floatformat}}</strong></td>
 			{% endif %}
-			{% if record.depth == None %}
+			{% if record.debt == None %}
 			<td class="tablestyle"><strong>0</strong></td>
 			{% else %}
-			<td class="tablestyle"><strong>{{record.depth|floatformat}}</strong></td>
+			<td class="tablestyle"><strong>{{record.debt|floatformat}}</strong></td>
 			{% endif %}
 			<form action="{% url 'admin_delete_payment_from_student_profile' record.id %}" method="POST" class="deletepaymentform">
 				{% csrf_token %}
 				<td class="tablestyle"><button class="delete-payment updat btn btn-danger" name="delete_payment">Delete</button></td>
-				<!-- <td class="tablestyle"><button id="delete-payment" class="updat btn btn-danger">Delete</button></td> -->
 		</form>			
 		</tr>
 		{% endfor %}
