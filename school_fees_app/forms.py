@@ -9,4 +9,4 @@ class TermlyPaymentForm(forms.ModelForm):
     class Meta:
         model = SchoolFeesPayment
         fields = ['student', 'schoolfees', 'when_made',
-                  'debth', 'troll', 'soap', 'broom']
+                  'debt', 'troll', 'soap', 'broom']

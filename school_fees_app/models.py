@@ -7,10 +7,8 @@ class SchoolFeesPayment(models.Model):
         StudentInfo, null=True, on_delete=models.SET_NULL)
     schoolfees = models.FloatField(null=True)
     when_made = models.DateField(blank=True, null=True)
-    debth = models.FloatField(null=True)
+    debt = models.FloatField(null=True)
     troll = models.BooleanField(default=False)
     soap = models.BooleanField(default=False)
     broom = models.BooleanField(default=False)
 
-    # def __str__(self):
-    #     return self.student

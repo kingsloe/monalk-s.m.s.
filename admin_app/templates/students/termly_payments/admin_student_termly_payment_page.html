@@ -29,7 +29,7 @@
         </div>
         <div class="form-group hidefee">
           <p><b>Debt</b></p>
-          {% render_field form.debth id="debt" class="form-control hidefee" placeholder="Remaining Debt" %}
+          {% render_field form.debt id="debt" class="form-control hidefee" placeholder="Remaining Debt" %}
         </div>
         <div class="form-group">
           <p><b>Troll</b></p>
@@ -48,7 +48,7 @@
 
       {% comment %} {% for lastdebt in  student_pay%} 
         {% if forloop.last %}
-      <h3>AR: {{lastdebt.debth}}</h3>
+      <h3>AR: {{lastdebt.debt}}</h3>
         {% endif %}
       {% endfor %} {% endcomment %}
       <h3>AR: {{student.termly_debt}}</h3>

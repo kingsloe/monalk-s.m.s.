@@ -519,12 +519,12 @@ def admin_student_termly_payment_view(request, pk):
     if request.method == 'POST':
         form = TermlyPaymentForm(request.POST)
         if form.is_valid():
-            deb = form.cleaned_data['debth']
+            deb = form.cleaned_data['debt']
             student.termly_debt = deb
             student.troll = form.cleaned_data['troll']
             student.soap = form.cleaned_data['soap']
             student.broom = form.cleaned_data['broom']
-            if form.cleaned_data['debth'] == 0 or form.cleaned_data['debth'] == None and form.cleaned_data['troll'] == True and form.cleaned_data['soap'] == True and form.cleaned_data['broom'] == True:
+            if form.cleaned_data['debt'] == 0 or form.cleaned_data['debt'] == None and form.cleaned_data['troll'] == True and form.cleaned_data['soap'] == True and form.cleaned_data['broom'] == True:
                 student.checkifpaidterm = True
             student.save()
             form.save()

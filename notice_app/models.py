@@ -5,7 +5,7 @@ from django.db import models
 
 class Notice(models.Model):
     date = models.DateField(auto_now=True)
-    by = models.CharField(max_length=20, null=True, default='school')
+    by = models.CharField(max_length=20, default='school')
     message = models.CharField(max_length=500)
 
     class Meta:
