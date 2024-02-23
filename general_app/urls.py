@@ -4,7 +4,7 @@ from .views import (
     aboutus_view,
     send_email_view,
     login_view,
-    singup_options_view,
+    signup_options_view,
 )
 from admin_app.views import admin_homepage_view
 from students_app.views import student_homepage_view
@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/admin-homepage/', admin_homepage_view, name='admin-homepage'),
     path('student/student-homepage/', student_homepage_view,
          name='student-homepage'),
-    path('signup-options/', singup_options_view, name='signup_options'),
+    path('signup-options/', signup_options_view, name='signup_options'),
 ]

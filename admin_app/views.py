@@ -29,7 +29,7 @@ from school_fees_app.models import SchoolFeesPayment
 # |||||| IMPORTING MODELS FROM OTHER APPS ||||||||||
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_homepage_view(request):
     #Get the number of active and pending teachers and students
@@ -59,7 +59,7 @@ def admin_homepage_view(request):
     return render(request, 'admin_homepage.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_notice_view(request):
     if request.method == 'POST':
@@ -77,26 +77,28 @@ def admin_notice_view(request):
     return render(request, 'admin_notice.html', context)
 
 
+# @login_required(login_url='login')
+@user_passes_test(is_admin)
 def delete_notice_view(request, pk):
     notice = Notice.objects.get(id=pk).delete()
     return redirect('admin_homepage')
 
 # ||||||||||||||||||||||| ALL ABOUT THE TEACHERS |||||||||||||||||||||||||||||||
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_teacher_homepage_view(request):
     return render(request, 'teachers/admin_teacher_homepage.html')
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_view_all_teachers_view(request):
     teachers = TeacherInfo.objects.filter(status=True)
     return render(request, 'teachers/admin_view_all_teachers.html', {'teachers': teachers})
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_add_teacher_view(request):
     if request.method == 'POST':
@@ -135,7 +137,7 @@ def admin_add_teacher_view(request):
     return render(request, 'teachers/admin_add_teacher.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_update_individual_teacher_info_view(request, pk):
     teacher = TeacherInfo.objects.get(id=pk)
@@ -170,7 +172,7 @@ def admin_update_individual_teacher_info_view(request, pk):
     return render(request, 'teachers/admin_update_individual_teacher_info_view.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_approve_teachers_view(request):
     applied_teachers = TeacherInfo.objects.filter(status=False)
@@ -186,13 +188,13 @@ def admin_approve_teachers_view(request):
 # ||||||||||||||||||||||| ALL ABOUT THE STUDENTS |||||||||||||||||||||||||||||||
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_student_homepage_view(request):
     return render(request, 'students/students_general/admin_student_homepage.html')
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_view_all_students_view(request):
     students = StudentInfo.objects.filter(status=True)
@@ -202,11 +204,9 @@ def admin_view_all_students_view(request):
     return render(request, 'students/students_general/admin_view_all_students.html', context)
 
 
-@login_required(login_url='login')
+# # @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_add_student_view(request):
-
-
     if request.method == 'POST':
         user_form = StudentUserInfoForm(request.POST)
         student_form = StudentInfoForm(request.POST)
@@ -243,7 +243,7 @@ def admin_add_student_view(request):
     return render(request, 'students/students_general/admin_add_student.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_approve_students_view(request):
     students = StudentInfo.objects.filter(status=False)
@@ -254,7 +254,7 @@ def admin_approve_students_view(request):
     return render(request, 'students/students_general/admin_approve_students.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_approve_or_decline_student_view(request, pk):
     if request.method == 'POST':
@@ -269,7 +269,7 @@ def admin_approve_or_decline_student_view(request, pk):
     return redirect('admin_approve_students')
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_view_individual_student_info_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
@@ -298,7 +298,7 @@ def admin_view_individual_student_info_view(request, pk):
     return render(request, 'students/students_general/admin_view_individual_student_info.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_update_individual_student_info_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
@@ -337,7 +337,7 @@ def admin_update_individual_student_info_view(request, pk):
 # ||||||||||||||||||||||| ALL STUDENTS PAYMENT |||||||||||||||||||||||||||||||
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_students_to_pay_view(request):
     students = StudentInfo.objects.filter(status=True, checkifpaiddaily=False)
@@ -354,7 +354,7 @@ def admin_students_to_pay_view(request):
     return render(request, 'students/daily_payments/admin_students_to_pay.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_student_daily_payment_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
@@ -382,7 +382,7 @@ def admin_student_daily_payment_view(request, pk):
     return render(request, 'students/daily_payments/admin_student_daily_payment_page.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_view_records_of_payment_view(request):
     page_obj = Payment.objects.all().order_by('-id')
@@ -401,7 +401,7 @@ def admin_view_records_of_payment_view(request):
     return render(request, 'students/daily_payments/admin_view_records_of_payment.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_view_history_of_daily_total_payment_view(request):
 
@@ -426,7 +426,7 @@ def admin_view_history_of_daily_total_payment_view(request):
     return render(request, 'students/daily_payments/admin_view_history_of_daily_total_payment.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_daily_paid_students_view(request):
     students = StudentInfo.objects.filter(checkifpaiddaily=True)
@@ -437,7 +437,7 @@ def admin_daily_paid_students_view(request):
     return render(request, 'students/daily_payments/admin_daily_paid_students.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_delete_daily_paid_student_view(request, pk):
     students_paid = StudentInfo.objects.get(id=pk)
@@ -451,12 +451,23 @@ def admin_delete_daily_paid_student_view(request, pk):
     return redirect('admin_daily_paid_students')
 
 
-@login_required(login_url='login')
+"""
+Deletes a payment record for a student.
+
+Parameters:
+- request (HttpRequest): The request object. 
+- pk (int): The primary key of the payment record to delete.
+
+Returns:
+- HttpResponse: Redirects to the view for that student's profile on success, 
+                or back to the view all students page on failure.
+"""
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_delete_payment_from_student_profile_view(request, pk):
     if request.method == 'POST':
+        payment = Payment.objects.get(id=pk)
         if 'delete_payment' in request.POST:
-            payment = Payment.objects.get(id=pk)
             payment.delete()
             payment.student.checkifpaiddaily = False
             payment.student.save()
@@ -468,7 +479,7 @@ def admin_delete_payment_from_student_profile_view(request, pk):
     return redirect('admin_view_all_students')
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_students_to_pay_termly_view(request):
     students = StudentInfo.objects.filter(
@@ -508,7 +519,7 @@ def admin_students_to_pay_termly_view(request):
     return render(request, 'students/termly_payments/admin_students_to_pay_termly.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_student_termly_payment_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
@@ -523,7 +534,7 @@ def admin_student_termly_payment_view(request, pk):
             student.troll = form.cleaned_data['troll']
             student.soap = form.cleaned_data['soap']
             student.broom = form.cleaned_data['broom']
-            if form.cleaned_data['debt'] == 0 or form.cleaned_data['debt'] == None and form.cleaned_data['troll'] == True and form.cleaned_data['soap'] == True and form.cleaned_data['broom'] == True:
+            if form.cleaned_data['debt'] == 0 or form.cleaned_data['debt'] is None and form.cleaned_data['troll'] == True and form.cleaned_data['soap'] == True and form.cleaned_data['broom'] == True:
                 student.checkifpaidterm = True
             student.save()
             form.save()
@@ -537,7 +548,7 @@ def admin_student_termly_payment_view(request, pk):
     return render(request, 'students/termly_payments/admin_student_termly_payment_page.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_termly_paid_students_view(request):
     students = StudentInfo.objects.filter(checkifpaidterm=True)
@@ -546,7 +557,7 @@ def admin_termly_paid_students_view(request):
     return render(request, 'students/termly_payments/admin_termly_paid_students.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_delete_termly_paid_student_view(request, pk):
     students_paid = StudentInfo.objects.get(id=pk)
@@ -561,7 +572,7 @@ def admin_delete_termly_paid_student_view(request, pk):
     return redirect('admin_termly_paid_students')
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_records_of_all_schoolfees_payment_view(request):
     page_obj = SchoolFeesPayment.objects.all().order_by('-id')
@@ -577,7 +588,7 @@ def admin_records_of_all_schoolfees_payment_view(request):
     return render(request, 'students/termly_payments/admin_records_of_all_schoolfees_payment.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_students_with_debt_view(request):
     students = StudentInfo.objects.all()

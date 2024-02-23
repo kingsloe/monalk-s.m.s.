@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import (
     StudentUserInfoForm, 
-    OutsideStudentInfoForm
+    OutsideStudentInfoForm,
 )
+from .models import StudentInfo
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from notice_app.models import Notice

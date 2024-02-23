@@ -7,28 +7,15 @@ from django.contrib.auth import authenticate, login
 from students_app.models import StudentInfo
 # Create your views here.
 
-
 def is_admin(user):
-    return user.groups.filter(name='ADMIN').exists
-
-
-def is_student(user):
-    return user.groups.filter(name='STUDENT').exists
-
-
-def is_teacher(user):
-    return user.groups.filter(name='TEACHER').exists
-
-
-def is_admin_in(user):
     return user.groups.filter(name='ADMIN')
 
 
-def is_student_in(user):
+def is_student(user):
     return user.groups.filter(name='STUDENT')
 
 
-def is_teacher_in(user):
+def is_teacher(user):
     return user.groups.filter(name='TEACHER')
 
 
@@ -40,7 +27,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            if is_student_in(request.user):
+            if is_student(request.user):
                 accountapproval = StudentInfo.objects.filter(
                     user_id=request.user.id, status=True)
                 if accountapproval:
@@ -53,7 +40,7 @@ def login_view(request):
     return render(request, 'login.html', context)
 
 
-def singup_options_view(request):
+def signup_options_view(request):
     return render(request, 'signup_options.html')
 
 
