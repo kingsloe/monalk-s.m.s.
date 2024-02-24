@@ -222,20 +222,21 @@ def admin_add_student_view(request):
                 student.termly_debt = 0
             student.save()
             messages.success(request, 'Adding student was successful.')
-            return redirect('admin_student_homepage')
-        else:
-            errors = user_form.errors.get_json_data(escape_html=False)
-            errors.update(student_form.errors.get_json_data(escape_html=False))
-
-            error_list = ErrorList()
-            for field, field_errors in errors.items():
-                for error in field_errors:
-                    error_list.append(f"{field}: {error['message']}")
-
-            messages.error(request, error_list)        
+            return redirect('admin_student_homepage')      
     else:    
         user_form = StudentUserInfoForm()
-        student_form = StudentInfoForm()    
+        student_form = StudentInfoForm() 
+
+
+    errors = user_form.errors.get_json_data(escape_html=False)
+    errors.update(student_form.errors.get_json_data(escape_html=False))
+
+    error_list = ErrorList()
+    for field, field_errors in errors.items():
+        for error in field_errors:
+            error_list.append(f"{field}: {error['message']}")
+
+    messages.error(request, error_list)         
     context = {
         'user_form': user_form,
         'student_form': student_form,

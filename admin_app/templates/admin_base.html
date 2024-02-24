@@ -46,22 +46,15 @@
     <script src="{% static 'js/navbar.js' %}"></script>    
 
     <script>
+
         '{% for message in messages %}'
-        if('{{message}}'.includes('not')){
             alertify.set('notifier','position', 'top-center');
-            alertify.error('{{message}}');
-            console.log('{{message}}')
-        }else{         
-            alertify.set('notifier','position', 'top-center');
-            alertify.success('{{message}}');
-            console.log('{{message}}')
-        }
+            alertify.notify('{{ message }}', '{{ message.tags }}', 5);
          '{% endfor %}'
          
       $(document).ready(function() {
         $(".search").keyup(function () {
           var searchTerm = $(".search").val();
-          var listItem = $('.results tbody').children('tr');
           var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
           
         $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
