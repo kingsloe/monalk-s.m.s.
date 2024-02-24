@@ -39,7 +39,7 @@
     <script>
         '{% for message in messages %}'
          alertify.set('notifier','position', 'top-center');
-         alertify.success('{{message}}');
+        alertify.notify("{{ message }}", "{{ message.tags }}", 5);
          '{% endfor %}'
       </script>
 
