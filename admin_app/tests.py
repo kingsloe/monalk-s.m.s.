@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from django.test import Client, TestCase
 from django.urls import reverse
-from key import ISADMINPASSWORD, ISADMINUSERNAME, NONADMINPASSWORD, NONADMINUSERNAME
+from key import ISADMINPASSWORD, ISADMINUSERNAME, NONADMINPASSWORD, NONADMINUSERNAME, TESTPASSWORD
 
 class AdminAddStudentViewTest(TestCase):
     def setUp(self):
@@ -33,7 +33,7 @@ class AdminAddStudentViewTest(TestCase):
             'first_name':'testuser', 
             'last_name':'testuser_last',
             'username':'MEC001', 
-            'password':'MEC001',
+            'password':TESTPASSWORD,
             'roll':'MEC001', 
             'cl':'K.S.A.', 
             'mobile':'0242508379', 
