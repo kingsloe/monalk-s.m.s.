@@ -64,3 +64,6 @@ def student_homepage_view(request):
         'method': method,
     }
     return render(request, 'student_homepage.html', context)
+
+def non_approved_students_view(request):
+    return render(request, 'student_wait_for_approval.html')

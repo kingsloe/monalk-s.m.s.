@@ -7,7 +7,7 @@ from .views import (
     signup_options_view,
 )
 from admin_app.views import admin_homepage_view
-from students_app.views import student_homepage_view
+from students_app.views import student_homepage_view, non_approved_students_view
 from django.contrib.auth.views import LogoutView
 
 
@@ -22,4 +22,5 @@ urlpatterns = [
     path('student/student-homepage/', student_homepage_view,
          name='student-homepage'),
     path('signup-options/', signup_options_view, name='signup_options'),
+    path('non-approved/', non_approved_students_view, name='non-approved')
 ]

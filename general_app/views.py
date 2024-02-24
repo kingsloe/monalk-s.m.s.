@@ -18,8 +18,22 @@ def is_student(user):
 def is_teacher(user):
     return user.groups.filter(name='TEACHER')
 
+def is_student_approved(user):
+    return is_student(user) and StudentInfo.objects.filter(user_id=user.id, status=True).exists()
+
+def get_user_homepage(user):
+    if is_student_approved(user):
+        return 'student-homepage'
+    elif is_student_approved(user) == False:
+        return 'non-approved'  
+    elif is_admin(user):
+        return 'admin-homepage'
+    return 'homepage'            
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect(get_user_homepage(request.user))
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -27,17 +41,8 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            if is_student(request.user):
-                accountapproval = StudentInfo.objects.filter(
-                    user_id=request.user.id, status=True)
-                if accountapproval:
-                    return redirect('homepage')
-                else:
-                    return render(request, 'student_wait_for_approval.html',)
-
-            return redirect('homepage')
-    context = {}
-    return render(request, 'login.html', context)
+            return redirect(get_user_homepage(user))            
+    return render(request, 'login.html')
 
 
 def signup_options_view(request):

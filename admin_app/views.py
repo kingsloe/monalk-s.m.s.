@@ -29,7 +29,7 @@ from school_fees_app.models import SchoolFeesPayment
 # |||||| IMPORTING MODELS FROM OTHER APPS ||||||||||
 
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_homepage_view(request):
     #Get the number of active and pending teachers and students
@@ -204,7 +204,7 @@ def admin_view_all_students_view(request):
     return render(request, 'students/students_general/admin_view_all_students.html', context)
 
 
-# # @login_required(login_url='login')
+@login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_add_student_view(request):
     if request.method == 'POST':
