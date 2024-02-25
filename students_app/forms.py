@@ -15,7 +15,7 @@ class StudentInfoForm(forms.ModelForm):
         model = StudentInfo
         fields = ['roll', 'cl', 'mobile', 'fee', 'status',
                   'date_of_admission', 'date_of_birth', 'gender', 'mother', 'father',
-                  'residence', 'foodfee', 'carfee', 'payment_category', 'payment_method',
+                  'town', 'foodfee', 'carfee', 'payment_category', 'payment_method',
                   'form_of_transportation', 'passport']
 
 
@@ -24,5 +24,5 @@ class OutsideStudentInfoForm(forms.ModelForm):
         model = StudentInfo
         fields = ['date_of_admission', 'date_of_birth',
                   'gender', 'mother', 'father', 'mobile',
-                  'passport', 'cl', 'residence', 'payment_category',
+                  'passport', 'cl', 'town', 'payment_category',
                   'payment_method', 'form_of_transportation']

@@ -1,20 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from general_app.models import Town
 
 # Create your models here.
-COMING_FROM = [
-    ('Dwenem', 'Dwenem'),
-    ('Mpuasu', 'Mpuasu'),
-    ('Adamsu', 'Adamsu'),
-    ('Bodaa', 'Bodaa'),
-    ('Kofitia', 'Kofitia'),
-    ('Adiokor1', 'Adiokor1'),
-    ('Adiokor2', 'Adiokor2'),
-    ('Zezera', 'Zezera'),
-    ('Kwamepim', 'Kwamepim'),
-    ('Kotokware', 'Kotokware'),
-]
-
 GENDER = [
     ('Male', 'Male'),
     ('Female', 'Female')
@@ -62,7 +50,7 @@ class StudentInfo(models.Model):
     father = models.CharField(max_length=100, blank=True)
     mobile = models.CharField(max_length=40, blank=True)
     cl = models.CharField(max_length=100, choices=CLASSES)
-    residence = models.CharField(max_length=45, choices=COMING_FROM)
+    town = models.ForeignKey(Town, on_delete=models.CASCADE, null=True)
     fee = models.FloatField(null=True, default=210)
     foodfee = models.FloatField(null=True, blank=True)
     carfee = models.FloatField(null=True, blank=True)

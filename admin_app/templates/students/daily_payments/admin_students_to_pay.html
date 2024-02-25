@@ -13,7 +13,7 @@
       <thead class="stay">
         <tr>
           <th>Name</th>
-          <th>Residence</th>
+          <th>Town</th>
           <th>Class</th>
           <th>Pay</th>
         </tr>
@@ -22,7 +22,7 @@
         {% for s in students %}
         <tr>
           <td class="tablestyle"><strong>{{s.get_name}}</strong></td>
-          <td class="tablestyle"><strong>{{s.residence}}</strong></td>
+          <td class="tablestyle"><strong>{{s.town}}</strong></td>
           <td class="tablestyle"><strong>{{s.cl}}</strong></td>
           <td class="tablestyle"><a href="{% url 'admin_student_daily_payment' s.id %}" class="btn btn-success">Payment</a></td>
         </tr>

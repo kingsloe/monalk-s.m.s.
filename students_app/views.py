@@ -53,7 +53,7 @@ def student_homepage_view(request):
         'gender': studentdata[0].gender,
         'mother': studentdata[0].mother,
         'father': studentdata[0].father,
-        'residence': studentdata[0].residence,
+        'town': studentdata[0].town,
         'date_of_birth': studentdata[0].date_of_birth,
         'date_of_admission': studentdata[0].date_of_admission,
         'cl': studentdata[0].cl,
