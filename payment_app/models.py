@@ -14,3 +14,7 @@ class Payment(models.Model):
     balance = models.FloatField(null=True)
     debt = models.FloatField(null=True)
 
+class DailySchoolFees(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    amount = models.FloatField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)

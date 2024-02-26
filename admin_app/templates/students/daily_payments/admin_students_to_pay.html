@@ -39,7 +39,7 @@
 <button class="btn btn-success resetbtn"><a href="{% url 'admin_daily_paid_students' %}">Paid Students</a></button>
 </center>
 <script>
-    bttn1 = document.getElementById('dailyresetbtn');
+    let bttn1 = document.getElementById('dailyresetbtn');
     if(bttn1){
         bttn1.addEventListener('click', function(){
             if(confirm('Do you want to reset yesterday\'s payment?')){
