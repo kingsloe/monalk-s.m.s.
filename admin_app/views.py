@@ -340,7 +340,7 @@ def admin_update_individual_student_info_view(request, pk):
 # @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_students_to_pay_view(request):
-    students = StudentInfo.objects.filter(status=True, checkifpaiddaily=False)
+    students = StudentInfo.objects.filter(status=True, checkifpaiddaily=False).exclude(form_of_transportation='Walk', payment_method='School_Fees_Aside')
     all_students = StudentInfo.objects.filter(
         status=True, checkifpaiddaily=True)
     students_paying_per_day = StudentInfo.objects.filter(status=True, payment_method='Pay_Per_Day')

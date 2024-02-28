@@ -87,18 +87,18 @@ class StudentInfo(models.Model):
     def __str__(self):
         return self.user.first_name+' '+self.user.last_name
 
-    def get_school_fees_aside_base_fee(self, base_fee, base_lorry_fair):
+    def get_school_fees_aside_base_fee(self, base_fee, base_school_fee, base_lorry_fair):
         if self.form_of_transportation == 'Walk':
-            return 210
+            return base_school_fee - (0.5 if self.payment_category == 'Considered' else 0)
         elif self.form_of_transportation == 'Bus' and self.payment_category == 'Considered':
-            return base_fee - (0.5 if self.town.name == 'Adamsu' else 1)
-        return base_fee
+            return base_lorry_fair - 1
+        return base_lorry_fair
 
     def get_pay_per_day_base_fee(self, base_fee, base_school_fee):
         if self.form_of_transportation == 'Walk':
             return base_school_fee - (0.5 if self.payment_category == 'Considered' else 0)
         elif self.form_of_transportation == 'Bus' and self.payment_category == 'Considered':
-            return base_fee - (0.5 if self.payment_category == 'Considered'and self.town.name == 'Adamsu' else 1)
+            return base_fee - 1
         return base_fee    
 
 
@@ -113,7 +113,7 @@ class StudentInfo(models.Model):
         base_fee = base_school_fee + base_lorry_fair
 
         if self.payment_method == 'School_Fees_Aside':
-            return self.get_school_fees_aside_base_fee(base_fee, base_lorry_fair)
+            return self.get_school_fees_aside_base_fee(base_fee, base_school_fee, base_lorry_fair)
         elif self.payment_method == 'Pay_Per_Day':
             return self.get_pay_per_day_base_fee(base_fee, base_school_fee)   
 
