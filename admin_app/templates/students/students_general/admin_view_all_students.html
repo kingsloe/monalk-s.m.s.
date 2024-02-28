@@ -20,9 +20,9 @@
             {% for student in students %}
             <tr>
                 <td class="tablestyle"><strong><a href="{% url 'admin_view_individual_student_info' student.id %}" id="std_sty">{{student.get_name}}</a></strong></td>
-                <td class="tablestyle"><strong>{{student.cl}}</strong></td>
+                <td class="tablestyle"><strong>{{student.grade}}</strong></td>
                 <td class="tablestyle"><strong>{{student.mobile}}</strong></td>
-                <td class="tablestyle"><strong>{{student.fee}}</strong></td>      
+                <td class="tablestyle"><strong>{{student.get_base_fee}}</strong></td>      
             </tr>
             {% endfor %}
             </tbody>

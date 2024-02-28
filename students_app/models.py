@@ -36,6 +36,10 @@ PAYMENT_CATEGORY = [
     ('Considered', 'Considered'),
 ]
 
+class DailySchoolFees(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    amount = models.FloatField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class StudentInfo(models.Model):
     class Meta:
@@ -49,11 +53,10 @@ class StudentInfo(models.Model):
     mother = models.CharField(max_length=100, blank=True)
     father = models.CharField(max_length=100, blank=True)
     mobile = models.CharField(max_length=40, blank=True)
-    cl = models.CharField(max_length=100, choices=CLASSES)
+    grade = models.CharField(max_length=100, choices=CLASSES)
     town = models.ForeignKey(Town, on_delete=models.CASCADE, null=True)
     fee = models.FloatField(null=True, default=210)
     foodfee = models.FloatField(null=True, blank=True)
-    carfee = models.FloatField(null=True, blank=True)
     status = models.BooleanField(default=False)
     checkifpaiddaily = models.BooleanField(default=False)
     checkifpaidterm = models.BooleanField(default=False)
@@ -83,3 +86,36 @@ class StudentInfo(models.Model):
 
     def __str__(self):
         return self.user.first_name+' '+self.user.last_name
+
+    def get_school_fees_aside_base_fee(self, base_fee, base_lorry_fair):
+        if self.form_of_transportation == 'Walk':
+            return 210
+        elif self.form_of_transportation == 'Bus' and self.payment_category == 'Considered':
+            return base_fee - (0.5 if self.town.name == 'Adamsu' else 1)
+        return base_fee
+
+    def get_pay_per_day_base_fee(self, base_fee, base_school_fee):
+        if self.form_of_transportation == 'Walk':
+            return base_school_fee - (0.5 if self.payment_category == 'Considered' else 0)
+        elif self.form_of_transportation == 'Bus' and self.payment_category == 'Considered':
+            return base_fee - (0.5 if self.payment_category == 'Considered'and self.town.name == 'Adamsu' else 1)
+        return base_fee    
+
+
+    def get_base_fee_components(self):
+        base_school_fee = DailySchoolFees.objects.last().amount
+        town = Town.objects.get(id=self.town_id)
+        base_lorry_fair = town.lorry_fair
+        return base_school_fee, base_lorry_fair
+
+    def get_base_fee(self):
+        base_school_fee, base_lorry_fair = self.get_base_fee_components()
+        base_fee = base_school_fee + base_lorry_fair
+
+        if self.payment_method == 'School_Fees_Aside':
+            return self.get_school_fees_aside_base_fee(base_fee, base_lorry_fair)
+        elif self.payment_method == 'Pay_Per_Day':
+            return self.get_pay_per_day_base_fee(base_fee, base_school_fee)   
+
+
+        

@@ -304,7 +304,6 @@ def admin_view_individual_student_info_view(request, pk):
 def admin_update_individual_student_info_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
     user = User.objects.get(id=student.user_id)
-
     form1 = StudentUserInfoForm(instance=user)
     form2 = StudentInfoForm(instance=student)
     if request.method == 'POST':
@@ -503,12 +502,12 @@ def admin_students_to_pay_termly_view(request):
 
         students_to_update = []
         for cls in student:
-            if cls.cl in next_class:
-                cls.cl = next_class[cls.cl]
+            if cls.grade in next_class:
+                cls.grade = next_class[cls.grade]
                 students_to_update.append(cls)
 
         if students_to_update:
-            StudentInfo.objects.bulk_update(students_to_update, ['cl']) 
+            StudentInfo.objects.bulk_update(students_to_update, ['grade']) 
 
         StudentInfo.objects.filter(payment_method='School_Fees_Aside').update(termly_debt=F('termly_debt')+210, troll=False, soap=False, broom=False)
         StudentInfo.objects.filter(payment_method='Pay_Per_Day').update(termly_debt=0, troll=False, soap=False, broom=False)
@@ -564,7 +563,6 @@ def admin_delete_termly_paid_student_view(request, pk):
     students_paid = StudentInfo.objects.get(id=pk)
     last_payment = SchoolFeesPayment.objects.filter(student=students_paid)
     delete_last = last_payment.last()
-    print(delete_last)
     if request.method == 'POST':
         delete_last.delete()
         students_paid.checkifpaidterm = False

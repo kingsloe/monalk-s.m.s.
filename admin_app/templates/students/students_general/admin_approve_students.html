@@ -21,7 +21,7 @@
         {% for s in students %}
         <tr>
           <td class="tablestyle"><strong>{{s.get_name}}</strong></td>
-          <td class="tablestyle"><strong>{{s.cl}}</strong></td>
+          <td class="tablestyle"><strong>{{s.grade}}</strong></td>
           <td class="tablestyle"><strong>{{s.mobile}}</strong></td>
           <td >
             <form action="{% url 'admin_approve_or_decline_student' s.id %}" method="POST" class="approve_or_decline">

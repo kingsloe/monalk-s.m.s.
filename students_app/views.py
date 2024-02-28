@@ -19,7 +19,6 @@ def student_signup_view(request):
         form1 = StudentUserInfoForm(request.POST)
         form2 = OutsideStudentInfoForm(request.POST)
         if form1.is_valid() and form2.is_valid():
-            print('worked')
             user = form1.save()
             user.set_password(user.password)
             user.save()
@@ -56,7 +55,7 @@ def student_homepage_view(request):
         'town': studentdata[0].town,
         'date_of_birth': studentdata[0].date_of_birth,
         'date_of_admission': studentdata[0].date_of_admission,
-        'cl': studentdata[0].cl,
+        'grade': studentdata[0].grade,
         'notice': notice,
         'debt': studentdata[0].daily_debt,
         'balance': studentdata[0].daily_balance,
