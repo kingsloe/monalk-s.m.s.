@@ -23,7 +23,7 @@ from payment_app.forms import DailyPaymentForm
 
 # |||||| IMPORTING MODELS FROM OTHER APPS ||||||||||
 from teachers_app.models import TeacherInfo, User
-from students_app.models import StudentInfo
+from students_app.models import StudentInfo, DailySchoolFees
 from notice_app.models import Notice
 from payment_app.models import Payment
 from school_fees_app.models import SchoolFeesPayment
@@ -358,6 +358,7 @@ def admin_students_to_pay_view(request):
 # @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_student_daily_payment_view(request, pk):
+    daily_school_fees = DailySchoolFees.objects.last().amount
     student = StudentInfo.objects.get(id=pk)
     payment_form = DailyPaymentForm(initial={'student': student})
     student_pay = student.payment_set.all()
@@ -378,14 +379,14 @@ def admin_student_daily_payment_view(request, pk):
     context = {
         'student': student,
         'payment_form': payment_form,
-        'student_pay': student_pay
+        'student_pay': student_pay,
+        'daily_school_fees': daily_school_fees,
     }
     return render(request, 'students/daily_payments/admin_student_daily_payment_page.html', context)
 
 def get_base_fee(request, pk):
     student = StudentInfo.objects.get(id=pk)
     base_fee = student.get_base_fee()
-    print(base_fee)
     return JsonResponse({'base_fee': base_fee})
 
 # @login_required(login_url='login')
