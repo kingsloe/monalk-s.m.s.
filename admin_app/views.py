@@ -7,6 +7,7 @@ from .forms import NoticeForm
 from django.db.models import F
 from django.forms.utils import ErrorList
 import logging
+from django.http import JsonResponse
 
 # |||||| IMPORTING FUNCTIONS FROM OTHER APPS ||||||||||
 from general_app. views import is_admin
@@ -381,6 +382,11 @@ def admin_student_daily_payment_view(request, pk):
     }
     return render(request, 'students/daily_payments/admin_student_daily_payment_page.html', context)
 
+def get_base_fee(request, pk):
+    student = StudentInfo.objects.get(id=pk)
+    base_fee = student.get_base_fee()
+    print(base_fee)
+    return JsonResponse({'base_fee': base_fee})
 
 # @login_required(login_url='login')
 @user_passes_test(is_admin)

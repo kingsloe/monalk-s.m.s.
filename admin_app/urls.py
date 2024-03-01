@@ -28,7 +28,8 @@ from .views import (
      admin_records_of_all_schoolfees_payment_view,
      admin_students_with_debt_view,
      admin_notice_view,
-     delete_notice_view)
+     delete_notice_view,
+     get_base_fee)
 
 urlpatterns = [
     path('homepage/', admin_homepage_view, name='admin_homepage'),
@@ -85,6 +86,7 @@ urlpatterns = [
          name='admin_records_of_all_schoolfees_payment'),
     path('students-with-debt', admin_students_with_debt_view,
          name='admin_students_with_debt'),
+    path('student-base-fee/<int:pk>/', get_base_fee, name='student_base_fee'),     
 
 
 
