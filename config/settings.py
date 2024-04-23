@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'widget_tweaks',
+    'django_extensions',
 
     'notice_app.apps.NoticeAppConfig',
     'payment_app.apps.PaymentAppConfig',
@@ -139,6 +140,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+SCRIPT_ROOT = os.path.join('/scripts/')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
