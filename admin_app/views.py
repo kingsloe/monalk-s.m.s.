@@ -8,6 +8,7 @@ from django.db.models import F
 from django.forms.utils import ErrorList
 import logging
 from django.http import JsonResponse
+from django.contrib.auth.models import Group
 
 # |||||| IMPORTING FUNCTIONS FROM OTHER APPS ||||||||||
 from general_app. views import is_admin
@@ -106,7 +107,7 @@ def admin_add_teacher_view(request):
         user_form = TeacherUserInfoForm(request.POST)
         teacher_form = TeacherInfoForm(request.POST)
         if user_form.is_valid() and teacher_form.is_valid():
-            user = user_form.save()
+            user = user_form.save(commit=False)
             user.set_password(user.password)
             user.save()
 
@@ -152,7 +153,7 @@ def admin_update_individual_teacher_info_view(request, pk):
             form1 = TeacherUserInfoForm(request.POST, instance=user)
             form2 = TeacherInfoForm(request.POST, instance=teacher)
             if form1.is_valid() and form2.is_valid():
-                user = form1.save()
+                user = form1.save(commit=False)
                 user.set_password(user.password)
                 user.save()
                 f2 = form2.save(commit=False)
@@ -215,6 +216,8 @@ def admin_add_student_view(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
+            my_student_group, created = Group.objects.get_or_create(name='STUDENT')
+            my_student_group.user_set.add(user)
 
             student = student_form.save(commit=False)
             student.user = user
@@ -334,8 +337,6 @@ def admin_update_individual_student_info_view(request, pk):
 
 # ||||||||||||||||||||||| ALL STUDENTS PAYMENT |||||||||||||||||||||||||||||||
 
-
-# ||||||||||||||||||||||| ALL STUDENTS PAYMENT |||||||||||||||||||||||||||||||
 
 
 # @login_required(login_url='login')

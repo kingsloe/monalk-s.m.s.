@@ -19,7 +19,7 @@ def student_signup_view(request):
         form1 = StudentUserInfoForm(request.POST)
         form2 = OutsideStudentInfoForm(request.POST)
         if form1.is_valid() and form2.is_valid():
-            user = form1.save()
+            user = form1.save(commit=False)
             user.set_password(user.password)
             user.save()
             f2 = form2.save(commit=False)
