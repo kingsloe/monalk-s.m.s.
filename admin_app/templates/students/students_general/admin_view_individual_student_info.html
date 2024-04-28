@@ -15,7 +15,7 @@
 		<div class="card bg-c-blue order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Id</h6>
-			<h2 class="text-right"><i class="fas fa-user-tie f-left"></i></h2>
+			<i class="fas fa-user-tie f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.roll}}</span></p>
 		</div>
 		</div>
@@ -25,7 +25,7 @@
 		<div class="card bg-c-green order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Date of Admission</h6>
-			<h2 class="text-right"><i class="fas fa-mobile-alt f-left"></i></h2>
+			<i class="fas fa-mobile-alt f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.date_of_admission}}</span></p>
 
 		</div>
@@ -36,7 +36,7 @@
 		<div class="card bg-c-yellow order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Name</h6>
-			<h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
+			<i class="fas fa-list-ol f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.get_name}}</span></p>
 		</div>
 		</div>
@@ -46,7 +46,7 @@
 		<div class="card bg-c-pink order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Date of Birth</h6>
-			<h2 class="text-right"><i class="fas fa-dollar f-left"></i></h2>
+			<i class="fas fa-dollar f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.date_of_birth}}</span></p>
 		</div>
 		</div>
@@ -56,7 +56,7 @@
 		<div class="card bg-c-yellow order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Gender</h6>
-			<h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
+			<i class="fas fa-list-ol f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.gender}}</span></p>
 		</div>
 		</div>
@@ -66,7 +66,7 @@
 		<div class="card bg-c-yellow order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Mother</h6>
-			<h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
+			<i class="fas fa-list-ol f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.mother}}</span></p>
 		</div>
 		</div>
@@ -76,7 +76,7 @@
 		<div class="card bg-c-yellow order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Fahter</h6>
-			<h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
+			<i class="fas fa-list-ol f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.father}}</span></p>
 		</div>
 		</div>
@@ -86,7 +86,7 @@
 		<div class="card bg-c-yellow order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Phone</h6>
-			<h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
+			<i class="fas fa-list-ol f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.mobile}}</span></p>
 		</div>
 		</div>
@@ -96,7 +96,7 @@
 		<div class="card bg-c-yellow order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Class</h6>
-			<h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
+			<i class="fas fa-list-ol f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.grade}}</span></p>
 		</div>
 		</div>
@@ -106,7 +106,7 @@
 		<div class="card bg-c-yellow order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Town</h6>
-			<h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
+			<i class="fas fa-list-ol f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.town}}</span></p>
 		</div>
 		</div>
@@ -116,7 +116,7 @@
 		<div class="card bg-c-yellow order-card">
 		<div class="card-block">
 			<h6 class="m-b-20">Fee</h6>
-			<h2 class="text-right"><i class="fas fa-list-ol f-left"></i></h2>
+			<i class="fas fa-list-ol f-left"></i>
 			<p><span style="font-size: 20px;padding-left: 6px;">{{student.fee}}</span></p>
 		</div>
 		</div>
@@ -132,11 +132,9 @@
 </div>
 
 <div class="last-record-of-money">
-	<h3 style="color: #41532a;" id="calculated"></h3>
-
+	<h3 style="color: #41532a;" id="calculated">TOTAL PAID:</h3>
 	{% for record in payment_record %}
 	{% if forloop.first %}
-
 	<h3 style="color: #41532a;">BALANCE: {{record.balance}}</h3>
 	<h3 class="areas">ARREARS: {{record.debt}}</h3>
 	{% endif %}
@@ -144,6 +142,7 @@
 </div>
 
 <table class="table table-bordered border-primary">
+	<caption style="display: none;"></caption>
 	<tr>
 		<th>Day</th>
 		<th>Canteen</th>

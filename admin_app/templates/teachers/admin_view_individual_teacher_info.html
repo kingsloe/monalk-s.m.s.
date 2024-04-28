@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'css/tables.css' %}">
+
+
+
+<div class="container">
+	
+	<div class="row">
+		<h1 class="hedy">This is {{teacher.get_name}}</h1>
+	<div class="col-md-4 col-xl-3">
+		<div class="card bg-c-blue order-card">
+		<div class="card-block">
+			<h6 class="m-b-20">Id</h6>
+			<i class="fas fa-user-tie f-left"></i>
+			<p><span style="font-size: 20px;padding-left: 6px;">{{teacher.id}}</span></p>
+		</div>
+		</div>
+	</div>
+
+	<div class="col-md-4 col-xl-3">
+		<div class="card bg-c-green order-card">
+		<div class="card-block">
+			<h6 class="m-b-20">Salary</h6>
+			<i class="fas fa-dollar f-left"></i>
+			<p><span style="font-size: 20px;padding-left: 6px;">{{teacher.salary}}</span></p>
+
+		</div>
+		</div>
+	</div>
+
+	<div class="col-md-4 col-xl-3">
+		<div class="card bg-c-yellow order-card">
+		<div class="card-block">
+			<h6 class="m-b-20">Mobile</h6>
+			<i class="fas fa-mobile f-left"></i>
+			<p><span style="font-size: 20px;padding-left: 6px;">{{teacher.mobile}}</span></p>
+		</div>
+		</div>
+	</div>
+
+	<div class="update">
+		<a href="{% url 'admin_update_individual_teacher_info' teacher.id %}" class="updat btn btn-success">Update</a>
+		<form method="POST" id="deleteteacherform">
+			{% csrf_token %}
+			<button id="deleteteacher" class="updat btn btn-danger">Delete</button>
+		</form>
+	</div>
+</div>
+
+
+<!-- <table class="table table-bordered border-primary">
+	<tr>
+		<th>Day</th>
+		<th>Canteen</th>
+		<th>Tuition</th>
+		<th>Bus</th>
+		<th>Balance</th>
+		<th>Debt</th>
+		<th>Delete</th>
+	</tr>
+	<tbody>
+		{% for record in payment_record %}
+		<tr>
+			<td class="tablestyle"><strong>{{record.when_made}}</strong></td>
+			{% if record.pay == None %}
+			<td class="tablestyle"><strong>0</strong></td>
+			{% else %}
+			<td class="tablestyle"><strong>{{record.pay|floatformat}}</strong></td>
+			{% endif %}
+			{% if record.schoolfees == None %}
+			<td class="tablestyle"><strong>0</strong></td>
+			{% else %}
+			<td class="tablestyle"><strong>{{record.schoolfees|floatformat}}</strong></td>
+			{% endif %}
+			{% if record.carpay == None %}
+			<td class="tablestyle"><strong>0</strong></td>
+			{% else %}
+			<td class="tablestyle"><strong>{{record.carpay|floatformat}}</strong></td>
+			{% endif %}{% if record.balance == None %}
+			<td class="tablestyle"><strong>0</strong></td>
+			{% else %}
+			<td class="tablestyle"><strong>{{record.balance|floatformat}}</strong></td>
+			{% endif %}
+			{% if record.debt == None %}
+			<td class="tablestyle"><strong>0</strong></td>
+			{% else %}
+			<td class="tablestyle"><strong>{{record.debt|floatformat}}</strong></td>
+			{% endif %}
+			<form action="{% url 'admin_delete_payment_from_teacher_profile' record.id %}" method="POST" class="deletepaymentform">
+				{% csrf_token %}
+				<td class="tablestyle"><button class="delete-payment updat btn btn-danger" name="delete_payment">Delete</button></td>
+		</form>			
+		</tr>
+		{% endfor %}
+		</tbody>
+</table>	 -->
+
+<script>
+	var delete_teacher_btn = document.getElementById('deleteteacher');
+	if(delete_teacher_btn){
+	delete_teacher_btn.addEventListener('click', function(){
+		if (confirm('Are you sure you want to delete this teacher? ')){
+			delete_teacher_btn.name = 'delete_teacher'
+			document.getElementById('deleteteacherform').submit();
+		}else{
+			event.preventDefault()
+		}
+	})}
+</script>
+{% endblock content %}

@@ -137,6 +137,23 @@ def admin_add_teacher_view(request):
     return render(request, 'teachers/admin_add_teacher.html', context)
 
 
+@user_passes_test(is_admin)
+def admin_view_individual_teacher_info_view(request, pk):
+    teacher = TeacherInfo.objects.get(id=pk)
+    if request.method == 'POST':
+        if 'delete_teacher' in request.POST:
+            teacher.status = False
+            teacher.save()
+            messages.success(request, 'Deleting teacher was successful')
+            return redirect ('admin_view_all_teachers')
+        else:
+            messages.error(request, 'Could not delete teacher. Please try again.')
+            return redirect('admin_view_individual_teacher_info', pk)
+    context = {
+        'teacher' : teacher
+    }
+    return render(request, 'teachers/admin_view_individual_teacher_info.html', context)
+
 
 @user_passes_test(is_admin)
 def admin_update_individual_teacher_info_view(request, pk):
@@ -146,24 +163,19 @@ def admin_update_individual_teacher_info_view(request, pk):
     form1 = TeacherUserInfoForm(instance=user)
     form2 = TeacherInfoForm(instance=teacher)
 
-    if request.method == 'POST':
-        if 'update' in request.POST:
-            form1 = TeacherUserInfoForm(request.POST, instance=user)
-            form2 = TeacherInfoForm(request.POST, instance=teacher)
-            if form1.is_valid() and form2.is_valid():
-                user = form1.save(commit=False)
-                user.set_password(user.password)
-                user.save()
-                f2 = form2.save(commit=False)
-                f2.save()
-                messages.success(request, 'Updating Teacher was successful')
-                return redirect('admin_view_all_teachers')
-            else:
-                messages.error(request, 'Could not update teacher')
-                return redirect('admin_view_all_teachers')
-        elif 'delete' in request.POST:
-            user.delete()
-            teacher.delete()
+    if request.method == 'POST' and 'update' in request.POST:
+        form1 = TeacherUserInfoForm(request.POST, instance=user)
+        form2 = TeacherInfoForm(request.POST, instance=teacher)
+        if form1.is_valid() and form2.is_valid():
+            user = form1.save(commit=False)
+            user.set_password(user.password)
+            user.save()
+            f2 = form2.save(commit=False)
+            f2.save()
+            messages.success(request, 'Updating Teacher was successful')
+            return redirect('admin_view_all_teachers')
+        else:
+            messages.error(request, 'Could not update teacher')
             return redirect('admin_view_all_teachers')
     context = {
         'form1': form1,
@@ -288,7 +300,7 @@ def admin_view_individual_student_info_view(request, pk):
             messages.success(request, 'Deleting student was successful')
             return redirect('admin_view_all_students')
         else:
-            messages.error(request, 'Could not delete student')
+            messages.error(request, 'Could not delete student. Please try again.')
             return redirect('admin_view_individual_student_info', pk)
 
     context = {
