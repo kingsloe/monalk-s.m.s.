@@ -8,6 +8,7 @@ from .views import (
 )
 from admin_app.views import admin_homepage_view
 from students_app.views import student_homepage_view, non_approved_students_view
+from teachers_app.views import teacher_homepage_view
 from django.contrib.auth.views import LogoutView
 
 
@@ -21,6 +22,7 @@ urlpatterns = [
     path('admin/admin-homepage/', admin_homepage_view, name='admin-homepage'),
     path('student/student-homepage/', student_homepage_view,
          name='student-homepage'),
+    path('teacher/teacher-homepage/', teacher_homepage_view, name='teacher-homepage'),
     path('signup-options/', signup_options_view, name='signup_options'),
     path('non-approved/', non_approved_students_view, name='non-approved')
 ]

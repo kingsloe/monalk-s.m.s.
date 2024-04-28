@@ -65,13 +65,9 @@
   </div><br>
   {% for notice in notices %}
   <div class="alert">
-    <!-- <form action="{% url 'delete_notice' notice.id %}" method="POST" id="deletestudentform">  -->
       {% csrf_token %}
-      <a href="{% url 'delete_notice' notice.id %}" class="closebtn"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span></a>
-      <!-- <input type="button" value="&times" class="closebtn" id="deletestudent"> -->
+            <a href="{% url 'delete_notice' notice.id %}" class="closebtn" role="button" tabindex="0" aria-label="Close notice" onclick="this.parentElement.style.display='none';">&times;</a>
       <strong>Posted on {{notice.date}} </strong><br><b>By : {{notice.by}}</b><br> {{notice.message}}
-    <!-- </form>   -->
-
   </div>
   {% endfor %}
   <script>

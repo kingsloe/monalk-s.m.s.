@@ -17,7 +17,7 @@
             {% if request.user|has_group:'ADMIN' %}  
                 <li><a href="{% url 'admin-homepage' %}" style="color: #131313"><span class="glyphicon glyphicon-home"></span><b> Dashboard </b></a></li>
               {% elif request.user|has_group:'TEACHER' %}
-                <li><a href="{% url 'homepage' %}" style="color: #131313"><span class="glyphicon glyphicon-home"></span><b> Dashboard </b></a></li>
+                <li><a href="{% url 'teacher-homepage' %}" style="color: #131313"><span class="glyphicon glyphicon-home"></span><b> Dashboard </b></a></li>
               {% elif request.user|has_group:'STUDENT' %}
                 <li><a href="{% url 'student-homepage' %}" style="color: #131313"><span class="glyphicon glyphicon-home"></span><b> Dashboard </b></a></li>
               {% endif %}

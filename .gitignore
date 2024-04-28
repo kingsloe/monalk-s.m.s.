@@ -11,6 +11,7 @@ db.sqlite3
 # Static and media files (if using the default settings)
 /static/
 /media/
+/staticfiles/
 
 # Secret keys and sensitive information
 *.secret

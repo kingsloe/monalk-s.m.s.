@@ -26,8 +26,8 @@ def get_user_homepage(user):
         return 'student-homepage'
     elif is_student_approved(user) == False:
         return 'non-approved'  
-    # elif is_teacher(user):
-    #     return 'teacher-homepage'
+    elif is_teacher(user):
+        return 'teacher-homepage'
     elif is_admin(user):
         return 'admin-homepage'
     return 'homepage'            

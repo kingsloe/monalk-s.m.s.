@@ -41,7 +41,7 @@ def student_signup_view(request):
 
 
 def student_homepage_view(request):
-    studentdata = StudentInfo.objects.all().filter(
+    studentdata = StudentInfo.objects.filter(
         status=True, user_id=request.user.id)
     notice = Notice.objects.all()
     method = studentdata[0].payment_method == 'School_Fees_Aside'
