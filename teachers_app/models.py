@@ -11,8 +11,8 @@ class TeacherInfo(models.Model):
     salary = models.PositiveIntegerField(null=False)
     joindate = models.DateField(auto_now_add=True)
     mobile = models.CharField(max_length=40)
+    take_fee_allowed = models.BooleanField(default=False)
     status = models.BooleanField(default=False)
-    # allow_to_take_money = models.BooleanField(default=False)
     passport = models.ImageField(
         blank=True, null=True, upload_to="static/images/passports/")
 

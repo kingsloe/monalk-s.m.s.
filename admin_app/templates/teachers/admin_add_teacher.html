@@ -35,6 +35,11 @@
             <div class="form-group">
               {% render_field teacher_form.salary class="form-control" placeholder="Salary" %}
             </div>
+            <div class="form-group">
+              
+              {% render_field teacher_form.take_fee_allowed class="check" %}
+              <span class="check">Allowed to take fee </span>
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-success">Hire</button>

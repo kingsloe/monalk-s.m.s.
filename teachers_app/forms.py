@@ -12,4 +12,4 @@ class TeacherUserInfoForm(forms.ModelForm):
 class TeacherInfoForm(forms.ModelForm):
     class Meta:
         model = TeacherInfo
-        fields = ['salary', 'mobile', 'status', 'passport', 'status']
+        fields = ['salary', 'mobile', 'status', 'passport', 'take_fee_allowed', 'status']
