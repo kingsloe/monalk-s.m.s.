@@ -49,11 +49,11 @@
               <p><b>Debt</b></p>
               <input name="debt" type="number" step="any" class="form-control" id="debt" placeholder="Debt" onkeyup="calculate_fee()" required>
             </div>
-            {% for i in student_pay %}
+            {% for student_previous_payments in student_previous_payments %}
               {% if forloop.last %}
               <div class="balnarea">
-                <h3>ML: {{i.balance}}</h3>
-                <h3 id="debbt">AR: {{i.debt}}</h3>
+                <h3>ML: {{student_previous_payment.balance}}</h3>
+                <h3 id="debbt">AR: {{student_previous_payment.debt}}</h3>
               </div>
               {% endif %}
             {% endfor %}
@@ -64,10 +64,10 @@
 </form>
 
 <script>
-    '{% for i in student_pay %}'
+    '{% for student_previous_payments in student_previous_payments %}'
       '{% if forloop.last %}'
-        document.getElementById('debt').defaultValue = '{{i.debt}}'
-        document.getElementById('balance').defaultValue = '{{i.balance}}'
+        document.getElementById('debt').defaultValue = '{{student_previous_payment.debt}}'
+        document.getElementById('balance').defaultValue = '{{student_previous_payment.balance}}'
       '{% endif %}'
     '{% endfor %}'
   // |||||||||||||||||||| CALCULATE EVERYTHING ||||||||||||||||

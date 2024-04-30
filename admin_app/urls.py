@@ -77,7 +77,7 @@ urlpatterns = [
     path('students-to-pay', admin_students_to_pay_view,
          name='admin_students_to_pay'),
 
-    path('student-id-<str:pk>-paying-today', admin_student_daily_payment_view,
+    path('student-<str:pk>-daily-fee', admin_student_daily_payment_view,
          name="admin_student_daily_payment"),
 
     path('records-of-students-payment', admin_view_records_of_payment_view,
@@ -98,7 +98,7 @@ urlpatterns = [
     path('students-to-pay-termly', admin_students_to_pay_termly_view,
          name='admin_students_to_pay_termly'),
 
-    path('student-id-<str:pk>-paying-termly',
+    path('student-<str:pk>-termly-fee',
          admin_student_termly_payment_view, name='admin_student_termly_payment'),
 
     path('students-paid-this-term', admin_termly_paid_students_view,

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<form method="POST">
+  {% csrf_token %}
+  <div class="container register-form">
+    <div class="form_header">
+      <div class="note">
+        <p>Make Payment</p>
+      </div>
+
+      <div class="form-content">
+        <h1 class="student_name">{{student}}</h1>
+        <div class="form-group" style="display: none;">
+          {% render_field payment_form.student class="form-control"%}
+        </div>
+        <div class="form-group">
+          <input type="number" step="any" class="form-control" id="main_amount" onkeyup="calculate_fee()">
+        </div>
+            <div class="form-group">
+              <p><b>Food Payment</b></p>
+              <input name="pay" type="number" value="0" class="form-control" id="food" placeholder="Food Payment" onkeyup="calculate_fee()" readonly>
+            </div>
+            {% if student.form_of_transportation == 'Bus' %}
+            <div class="form-group">
+              <p id="car_top"><b>Car Payment</b></p>
+              <input name="carpay" type="number" value="0" class="form-control" id="car" placeholder="Bus Fee" onkeyup="calculate_fee()" readonly>
+            </div>
+            {% endif %}
+            {% if student.payment_method == 'Pay_Per_Day' %}
+            <div class="form-group">
+              <p><b>School Fees Payment</b></p>
+              <input name="schoolfees" type="number" value="0" class="form-control" id="fees" placeholder="Daily School Fees" onkeyup="calculate_fee()" readonly>
+            </div>
+            {% endif %}
+            <div class="form-group">
+              <p><b>Date</b></p>
+              {% render_field payment_form.when_made class="form-control" placeholder="Date" %}
+            </div>
+            <div class="form-group">
+              <p><b>Balance</b></p>
+              <input name="balance" type="number" step="any" class="form-control" id="balance" placeholder="Balance" onkeyup="calculate_fee()" required>
+            </div>
+            <div class="form-group">
+              <p><b>Debt</b></p>
+              <input name="debt" type="number" step="any" class="form-control" id="debt" placeholder="Debt" onkeyup="calculate_fee()" required>
+            </div>
+            {% for student_previous_payment in student_previous_payments %}
+              {% if forloop.last %}
+              <div class="balnarea">
+                <h3>ML: {{student_previous_payment.balance}}</h3>
+                <h3 id="debbt">AR: {{student_previous_payment.debt}}</h3>
+              </div>
+              {% endif %}
+            {% endfor %}
+  <div class="paybtn"><button type="submit" class="btn btn-success">Pay</button></div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+    '{% for student_previous_payment in student_previous_payments %}'
+      '{% if forloop.last %}'
+        document.getElementById('debt').defaultValue = '{{student_previous_payment.debt}}'
+        document.getElementById('balance').defaultValue = '{{student_previous_payment.balance}}'
+      '{% endif %}'
+    '{% endfor %}'
+  // |||||||||||||||||||| CALCULATE EVERYTHING ||||||||||||||||
+
+    function fetch_base_fee(student_id){
+      return fetch('/admin/student-base-fee-'+student_id)
+        .then(response => {
+          if(!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data =>{
+          return data.base_fee;
+        })
+        .catch(error => {
+          console.error('Error fetching base fee:', error);
+          throw error;
+        })
+  }
+
+  function calculate_fee() {
+    fetch_base_fee('{{student.id}}')
+        .then(base_fee => {
+            let student_money = parseFloat(document.getElementById('main_amount').value);
+            let student_balance = parseFloat('{{student.daily_balance}}');
+            let student_debt = parseFloat('{{student.daily_debt}}');
+            
+            let debt_field = document.getElementById('debt');
+            let balance_field = document.getElementById('balance');
+            let school_fee = document.getElementById('fees');
+            let bus_fee = document.getElementById('car');
+
+            let transportation = '{{student.form_of_transportation}}';
+            let lorry_fair = '{{student.town.lorry_fair}}';
+            let daily_school_fees = '{{daily_school_fees}}';
+
+            let remaining_balance = (student_balance + student_money) - base_fee;
+
+            if (student_money >= base_fee) {
+              if (student_debt > 0) {
+                if (remaining_balance > student_debt) {
+                  debt_field.value = 0;
+                  balance_field.value = remaining_balance - student_debt;
+                } else {
+                  debt_field.value = student_debt - remaining_balance;
+                  balance_field.value = 0;
+                }
+              } else {
+                balance_field.value = remaining_balance;
+                debt_field.value = 0;
+              }
+            } else if ( student_balance >= base_fee - student_money){
+              if (remaining_balance > student_debt) {
+                  debt_field.value = 0;
+                  balance_field.value = remaining_balance - student_debt;
+                } else {
+                  debt_field.value = student_debt - remaining_balance;
+                  balance_field.value = 0;
+                }
+            } else {
+              balance_field.value = 0
+              debt_field.value = student_debt + base_fee - (student_money + student_balance);
+            }
+
+          
+          if ( transportation == 'Walk'){
+            school_fee.value = student_money
+          } else if ( transportation == 'Bus'){
+            let [bus_percent, school_fees_percent] = [(lorry_fair / base_fee) * 100, (daily_school_fees / base_fee) * 100]
+            bus_fee.value = ((bus_percent / 100) * student_money).toFixed(2)
+            school_fee.value = ((school_fees_percent / 100) * student_money).toFixed(2)
+            
+          }
+        })
+        .catch(error => {
+            console.error('Error fetching base fee:', error);
+        });
+    
+}
+</script>
+
+{% endblock content %}
+  

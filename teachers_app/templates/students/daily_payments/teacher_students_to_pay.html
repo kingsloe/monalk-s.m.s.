@@ -25,7 +25,7 @@
           <td class="tablestyle"><strong>{{student.get_name}}</strong></td>
           <td class="tablestyle"><strong>{{student.town}}</strong></td>
           <td class="tablestyle"><strong>{{student.grade}}</strong></td>
-          <td class="tablestyle"><a href="#" class="btn btn-success">Payment</a></td>
+          <td class="tablestyle"><a href="{% url 'teacher_student_daily_payment' student.id %}" class="btn btn-success">Payment</a></td>
         </tr>
         {% endfor %}
       </tbody>

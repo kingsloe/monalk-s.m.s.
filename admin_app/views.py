@@ -372,7 +372,7 @@ def admin_student_daily_payment_view(request, pk):
     daily_school_fees = DailySchoolFees.objects.last().amount
     student = StudentInfo.objects.get(id=pk)
     payment_form = DailyPaymentForm(initial={'student': student})
-    student_pay = student.payment_set.all()
+    student_previous_payments = student.payment_set.all()
     if request.method == 'POST':
         payment_form = DailyPaymentForm(request.POST)
         # ======================== RESET PAYMENT ========================#
@@ -390,7 +390,7 @@ def admin_student_daily_payment_view(request, pk):
     context = {
         'student': student,
         'payment_form': payment_form,
-        'student_pay': student_pay,
+        'student_previous_payments': student_previous_payments,
         'daily_school_fees': daily_school_fees,
     }
     return render(request, 'students/daily_payments/admin_student_daily_payment_page.html', context)
@@ -542,8 +542,7 @@ def admin_students_to_pay_termly_view(request):
 def admin_student_termly_payment_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
     form = TermlyPaymentForm(initial={'student': student})
-    student_pay = student.schoolfeespayment_set.all()
-    addedup = student_pay.aggregate(thesum=Sum('schoolfees'))
+    student_previous_schoolfees_payments = student.schoolfeespayment_set.all()
     if request.method == 'POST':
         form = TermlyPaymentForm(request.POST)
         if form.is_valid():
@@ -560,8 +559,6 @@ def admin_student_termly_payment_view(request, pk):
     context = {
         'student': student,
         'form': form,
-        'student_pay': student_pay,
-        'addedup': addedup,
     }
     return render(request, 'students/termly_payments/admin_student_termly_payment_page.html', context)
 

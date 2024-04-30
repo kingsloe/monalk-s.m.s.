@@ -22,7 +22,7 @@ urlpatterns = [
 
     path('', include('general_app.urls')),
 
-    path('student/', include(('students_app.urls', 'students_app'), namespace='students_app')),
+    path('student/', include('students_app.urls')),
 
     path('teacher/', include('teachers_app.urls')),
 
