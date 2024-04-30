@@ -15,7 +15,7 @@
         <ul class="nav navbar-nav">
           {% if user.is_authenticated %}
             {% if request.user|has_group:'ADMIN' %}  
-                <li><a href="{% url 'admin-homepage' %}" style="color: #131313"><span class="glyphicon glyphicon-home"></span><b> Dashboard </b></a></li>
+                <li><a href="{% url 'admin_homepage' %}" style="color: #131313"><span class="glyphicon glyphicon-home"></span><b> Dashboard </b></a></li>
               {% elif request.user|has_group:'TEACHER' %}
                 <li><a href="{% url 'teacher-homepage' %}" style="color: #131313"><span class="glyphicon glyphicon-home"></span><b> Dashboard </b></a></li>
               {% elif request.user|has_group:'STUDENT' %}
@@ -30,7 +30,7 @@
           {% if user.is_authenticated %}
           <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit" style="color: #131313; background: none; border: none; cursor: pointer; margin-top: 15px; margin-right: 10px;">
+            <button type="submit" class="logout_button">
               <span class="glyphicon glyphicon-user"></span><b> Logout </b>
           </form>
           {% else %}

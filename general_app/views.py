@@ -18,6 +18,9 @@ def is_student(user):
 def is_teacher(user):
     return user.groups.filter(name='TEACHER')
 
+def is_admin_or_teacher(user):
+    return user.groups.filter(name='ADMIN') or user.groups.filter(name= 'TEACHER')
+
 def is_student_approved(user):
     return is_student(user) and StudentInfo.objects.filter(user_id=user.id, status=True).exists()
 
@@ -29,7 +32,7 @@ def get_user_homepage(user):
     elif is_teacher(user):
         return 'teacher-homepage'
     elif is_admin(user):
-        return 'admin-homepage'
+        return 'admin_homepage'
     return 'homepage'            
 
 def login_view(request):

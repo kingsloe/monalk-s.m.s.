@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
 from general_app.views import is_teacher
 from .models import TeacherInfo
-
+from students_app.models import StudentInfo
 # Create your views here.
 
 """
@@ -22,3 +22,14 @@ def teacher_homepage_view(request):
         'mobile': teacherdata[0].mobile,
     }
     return render(request, 'teacher_homepage.html', context)
+
+@user_passes_test(is_teacher)
+def teacher_students_to_pay_view(request):
+    students = StudentInfo.objects.filter(status=True, checkifpaiddaily=False)
+
+    context = {
+        'students': students,
+    }
+    return render(request, 'students/daily_payments/teacher_students_to_pay.html', context)
+
+

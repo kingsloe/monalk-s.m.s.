@@ -19,7 +19,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout', LogoutView.as_view(
         template_name='general_homepage.html'), name='logout'),
-    path('admin/admin-homepage/', admin_homepage_view, name='admin-homepage'),
+    path('admin/admin-homepage/', admin_homepage_view, name='admin_homepage'),
     path('student/student-homepage/', student_homepage_view,
          name='student-homepage'),
     path('teacher/teacher-homepage/', teacher_homepage_view, name='teacher-homepage'),
