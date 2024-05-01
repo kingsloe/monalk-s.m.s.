@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
 from general_app.views import is_teacher
 from .models import TeacherInfo
@@ -36,18 +36,24 @@ def teacher_students_to_pay_view(request):
 @user_passes_test(is_teacher)
 def teacher_student_daily_payment_view(request, pk):
     daily_school_fees = DailySchoolFees.objects.last().amount
-    student = StudentInfo.objects.get(id=pk)
-    payment_form = DailyPaymentForm(initial={'student': student})
+    student = get_object_or_404(StudentInfo, pk=pk)
+    payment_form = DailyPaymentForm()
     student_previous_payments = student.payment_set.all()
+
     if request.method == 'POST':
         payment_form = DailyPaymentForm(request.POST)
         if payment_form.is_valid():
             debt = payment_form.cleaned_data['debt']
             balance = payment_form.cleaned_data['balance']
+            student.daily_debt = debt
             student.daily_balance = balance
             student.checkifpaiddaily = True
             student.save()
-            payment_form.save()
+            user = request.user
+            payment = payment_form.save(commit=False)
+            payment.student = student
+            payment.user = user
+            payment.save()
             return redirect('teacher_students_to_pay')
     context = {
         'student': student,

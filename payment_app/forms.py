@@ -8,5 +8,5 @@ class DailyPaymentForm(forms.ModelForm):
 
     class Meta:
         model = Payment
-        fields = ['student', 'pay', 'carpay', 'schoolfees',
-                  'balance', 'debt', 'when_made']
+        fields = ['user', 'student', 'pay', 'carpay', 'schoolfees',
+                  'balance', 'debt', 'when_made',]
