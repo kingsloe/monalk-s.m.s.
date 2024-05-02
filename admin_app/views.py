@@ -449,7 +449,7 @@ def admin_view_history_of_daily_total_payment_view(request):
 
 @user_passes_test(is_admin)
 def admin_daily_paid_students_view(request):
-    students = StudentInfo.objects.filter(checkifpaiddaily=True)
+    students = StudentInfo.objects.filter(status=True, checkifpaiddaily=True)
 
     context = {
         'students': students

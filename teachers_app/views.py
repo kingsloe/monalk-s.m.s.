@@ -4,6 +4,7 @@ from general_app.views import is_teacher
 from .models import TeacherInfo
 from students_app.models import StudentInfo, DailySchoolFees
 from payment_app.forms import DailyPaymentForm
+from payment_app.models import Payment
 # Create your views here.
 
 """
@@ -63,4 +64,27 @@ def teacher_student_daily_payment_view(request, pk):
     }
     return render(request, 'students/daily_payments/teacher_student_daily_payment.html', context)
 
+@user_passes_test(is_teacher)
+def teacher_daily_paid_students_view(request):
+    students = StudentInfo.objects.filter(status=True, checkifpaiddaily=True)
+    student_last_payments = {}
+    
+    for student in students:
+        last_payment = Payment.objects.filter(student=student, user=request.user).last()
+        student_last_payments[student] = last_payment
+    context = {
+        'student_last_payments': student_last_payments,
+    }
+    return render(request, 'students/daily_payments/teacher_daily_paid_students.html', context)
 
+@user_passes_test(is_teacher)
+def teacher_delete_daily_paid_student_view(request, pk):
+    students_paid = StudentInfo.objects.get(id=pk)
+    last_payment = Payment.objects.filter(student=students_paid)
+    delete_last = last_payment.last()
+    if request.method == 'POST':
+        delete_last.delete()
+        students_paid.checkifpaiddaily = False
+        students_paid.save()
+
+    return redirect('teacher_daily_paid_students')
