@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/tables.css' %}">
+<section class="hom"> 
+    <div class="text">
+        <input type="text" class="search form-control" placeholder="Search...">
+    <table class="table table-bordered border-primary results">
+      <caption style="display: none;"></caption>
+      <thead class="stay">
+        <tr>
+          <th>Names</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for payment in payments %}
+        <tr>
+          <td class="tablestyle">{{payment.student}}</td>
+          <td class="tablestyle">{{payment.pay}}</td>
+        </tr>
+        {% endfor %}
+      </tbody> 
+    </table> 
+    </div>
+</section>
+{% endblock content %}

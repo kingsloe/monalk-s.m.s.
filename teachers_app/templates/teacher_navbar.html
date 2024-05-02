@@ -24,6 +24,11 @@
               <a href="{% url 'teacher_students_to_pay' %}"><b>DailyPayment</b></a>
             </div>
           </li>
+          <li class="dropdown"><a href="#" style="color: #131313"><b>Records  </b><span class="fa fa-caret-down"></span></a>
+            <div class="dropdown-content">
+              <a href="{% url 'teacher_students_payment_records' %}"><b>FullRecords</b></a>
+            </div>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">    
           <li><form method="post" action="{% url 'logout' %}">

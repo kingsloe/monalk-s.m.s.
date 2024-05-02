@@ -17,17 +17,20 @@ def teacher_homepage_view(request):
     teacherdata = TeacherInfo.objects.filter(
         status=True, user_id=request.user.id
     )
+    payments = Payment.objects.filter(user=request.user)
     context = {
         'name': teacherdata[0].get_name,
         'salary': teacherdata[0].salary,
         'joindate': teacherdata[0].joindate,
         'mobile': teacherdata[0].mobile,
+        'payments': payments,
     }
     return render(request, 'teacher_homepage.html', context)
 
 @user_passes_test(is_teacher)
 def teacher_students_to_pay_view(request):
     students = StudentInfo.objects.filter(status=True, checkifpaiddaily=False)
+    
 
     context = {
         'students': students,
@@ -88,3 +91,12 @@ def teacher_delete_daily_paid_student_view(request, pk):
         students_paid.save()
 
     return redirect('teacher_daily_paid_students')
+
+@user_passes_test(is_teacher)
+def teacher_students_payment_records_view(request):
+    payments = Payment.objects.filter(user=request.user)
+
+    context = {
+        'payments': payments
+    }
+    return render(request, 'students/records/teacher_students_payment_records.html', context)
