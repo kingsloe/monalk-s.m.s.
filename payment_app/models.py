@@ -9,6 +9,7 @@ class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     student = models.ForeignKey(
         StudentInfo, null=True, on_delete=models.SET_NULL, blank=True)
+    amount = models.FloatField(null=True, blank=True)
     canteen = models.FloatField(null=True, blank=True, default=0)
     bus_fee = models.FloatField(null=True, blank=True, default=0)
     school_fees = models.FloatField(null=True, blank=True, default=0)

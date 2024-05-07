@@ -133,11 +133,11 @@
 
 <div class="last-record-of-money">
 	<h3 style="color: #41532a;" id="calculated">TOTAL PAID:</h3>
-	{% for record in payment_record %}
-	{% if forloop.first %}
-	<h3 style="color: #41532a;">BALANCE: {{record.balance}}</h3>
-	<h3 class="areas">ARREARS: {{record.debt}}</h3>
-	{% endif %}
+	{% for payment_record in payment_records %}
+		{% if forloop.first %}
+			<h3 style="color: #41532a;">BALANCE: {{payment_record.balance}}</h3>
+			<h3 class="areas">ARREARS: {{payment_record.debt}}</h3>
+		{% endif %}
 	{% endfor %}
 </div>
 
@@ -150,37 +150,46 @@
 		<th>Bus</th>
 		<th>Balance</th>
 		<th>Debt</th>
+		<th>User</th>
 		<th>Delete</th>
 	</tr>
 	<tbody>
-		{% for record in payment_record %}
+		{% for payment_record in payment_records %}
 		<tr>
-			<td ><strong>{{record.date}}</strong></td>
-			{% if record.canteen == None %}
-			<td ><strong>0</strong></td>
+			<td ><strong>{{payment_record.date}}</strong></td>
+			{% if payment_record.canteen == None %}
+				<td ><strong>0</strong></td>
 			{% else %}
-			<td ><strong>{{record.canteen|floatformat}}</strong></td>
+				<td ><strong>{{payment_record.canteen|floatformat}}</strong></td>
 			{% endif %}
-			{% if record.school_fees == None %}
-			<td ><strong>0</strong></td>
+				
+			{% if payment_record.school_fees == None %}
+				<td ><strong>0</strong></td>
 			{% else %}
-			<td ><strong>{{record.school_fees|floatformat}}</strong></td>
+				<td ><strong>{{payment_record.school_fees|floatformat}}</strong></td>
 			{% endif %}
-			{% if record.bus_fee == None %}
-			<td ><strong>0</strong></td>
+
+			{% if payment_record.bus_fee == None %}
+				<td ><strong>0</strong></td>
 			{% else %}
-			<td ><strong>{{record.bus_fee|floatformat}}</strong></td>
-			{% endif %}{% if record.balance == None %}
-			<td ><strong>0</strong></td>
-			{% else %}
-			<td ><strong>{{record.balance|floatformat}}</strong></td>
+				<td ><strong>{{payment_record.bus_fee|floatformat}}</strong></td>
 			{% endif %}
-			{% if record.debt == None %}
-			<td ><strong>0</strong></td>
+
+			{% if payment_record.balance == None %}
+				<td ><strong>0</strong></td>
 			{% else %}
-			<td ><strong>{{record.debt|floatformat}}</strong></td>
+				<td ><strong>{{payment_record.balance|floatformat}}</strong></td>
 			{% endif %}
-			<form action="{% url 'admin_delete_payment_from_student_profile' record.id %}" method="POST" class="deletepaymentform">
+			
+			{% if payment_record.debt == None %}
+				<td ><strong>0</strong></td>
+			{% else %}
+				<td ><strong>{{payment_record.debt|floatformat}}</strong></td>
+			{% endif %}
+
+			<td>{{payment_record.user}}</td>
+
+			<form action="{% url 'admin_delete_payment_from_student_profile' payment_record.id %}" method="POST" class="deletepaymentform">
 				{% csrf_token %}
 				<td ><button class="delete-payment updat btn btn-danger" name="delete_payment">Delete</button></td>
 		</form>			

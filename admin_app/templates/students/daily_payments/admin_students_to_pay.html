@@ -20,25 +20,25 @@
         </tr>
       </thead>
       <tbody>
-        {% for s in students %}
+        {% for student in students %}
         <tr>
-          <td ><strong>{{s.get_name}}</strong></td>
-          <td ><strong>{{s.town}}</strong></td>
-          <td ><strong>{{s.grade}}</strong></td>
-          <td ><a href="{% url 'admin_student_daily_payment' s.id %}" class="btn btn-success">Payment</a></td>
+          <td ><strong>{{student.get_name}}</strong></td>
+          <td ><strong>{{student.town}}</strong></td>
+          <td ><strong>{{student.grade}}</strong></td>
+          <td ><a href="{% url 'admin_student_daily_payment' student.id %}" class="btn btn-success">Payment</a></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
 </section>
-<center>
-<form action="" method="POST" id="resetdailypayment">
-    {% csrf_token %} 
-    <input class="btn btn-danger" type="button" value="Reset Payment" id="dailyresetbtn">
-</form>
-<button class="btn btn-success resetbtn"><a href="{% url 'admin_daily_paid_students' %}">Paid Students</a></button>
-</center>
+<div class="text-center d-flex justify-content-center">
+  <form action="" method="POST" id="resetdailypayment">
+      {% csrf_token %} 
+      <input class="btn btn-danger mr-2" type="button" value="Reset Payment" id="dailyresetbtn">
+  </form>
+  <button class="btn btn-success resetbtn"><a href="{% url 'admin_daily_paid_students' %}">Paid Students</a></button>
+</div>
 <script>
     let bttn1 = document.getElementById('dailyresetbtn');
     if(bttn1){

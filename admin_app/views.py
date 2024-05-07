@@ -288,10 +288,10 @@ def admin_approve_or_decline_student_view(request, pk):
 @user_passes_test(is_admin)
 def admin_view_individual_student_info_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
-    payment_record = student.payment_set.all().order_by('-id')
-    daily_canteen_record = payment_record.aggregate(daily_canteen=Sum('canteen'))
-    daily_bus_record = payment_record.aggregate(daily_bus=Sum('bus_fee'))
-    daily_tuition_record = payment_record.aggregate(
+    payment_records = student.payment_set.all().order_by('-id')
+    daily_canteen_record = payment_records.aggregate(daily_canteen=Sum('canteen'))
+    daily_bus_record = payment_records.aggregate(daily_bus=Sum('bus_fee'))
+    daily_tuition_record = payment_records.aggregate(
         daily_tuition=Sum('school_fees'))
     if request.method == 'POST':
         if 'delete_student' in request.POST:
@@ -305,7 +305,7 @@ def admin_view_individual_student_info_view(request, pk):
 
     context = {
         'student': student,
-        'payment_record': payment_record,
+        'payment_records': payment_records,
         'daily_canteen_record': daily_canteen_record,
         'daily_bus_record': daily_bus_record,
         'daily_tuition_record': daily_tuition_record,
