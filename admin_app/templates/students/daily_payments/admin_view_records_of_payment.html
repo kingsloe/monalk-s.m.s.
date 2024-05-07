@@ -27,18 +27,18 @@
           {% else %}
           <td >{{record.canteen|floatformat}}</td>
           {% endif %}
-          {% if record.carpay == None %}
+          {% if record.bus_fee == None %}
           <td >0</td>
           {% else %}
-          <td >{{record.carpay|floatformat}}</td>
+          <td >{{record.bus_fee|floatformat}}</td>
           {% endif %}
 
-          {% if record.schoolfees == None %}
+          {% if record.school_fees == None %}
           <td >0</td>
           {% else %}
-          <td >{{record.schoolfees|floatformat}}</td>
+          <td >{{record.school_fees|floatformat}}</td>
           {% endif %}
-          <td >{{record.when_made}}</td>
+          <td >{{record.date}}</td>
         </tr>
         {% endfor %}
       </tbody> 

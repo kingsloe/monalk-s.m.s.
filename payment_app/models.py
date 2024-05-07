@@ -10,9 +10,9 @@ class Payment(models.Model):
     student = models.ForeignKey(
         StudentInfo, null=True, on_delete=models.SET_NULL, blank=True)
     canteen = models.FloatField(null=True, blank=True, default=0)
-    carpay = models.FloatField(null=True, blank=True, default=0)
-    schoolfees = models.FloatField(null=True, blank=True, default=0)
-    when_made = models.DateField(blank=True, null=True)
+    bus_fee = models.FloatField(null=True, blank=True, default=0)
+    school_fees = models.FloatField(null=True, blank=True, default=0)
+    date = models.DateField(blank=True, null=True)
     balance = models.FloatField(null=True)
     debt = models.FloatField(null=True)
 

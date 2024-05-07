@@ -155,21 +155,21 @@
 	<tbody>
 		{% for record in payment_record %}
 		<tr>
-			<td ><strong>{{record.when_made}}</strong></td>
+			<td ><strong>{{record.date}}</strong></td>
 			{% if record.canteen == None %}
 			<td ><strong>0</strong></td>
 			{% else %}
 			<td ><strong>{{record.canteen|floatformat}}</strong></td>
 			{% endif %}
-			{% if record.schoolfees == None %}
+			{% if record.school_fees == None %}
 			<td ><strong>0</strong></td>
 			{% else %}
-			<td ><strong>{{record.schoolfees|floatformat}}</strong></td>
+			<td ><strong>{{record.school_fees|floatformat}}</strong></td>
 			{% endif %}
-			{% if record.carpay == None %}
+			{% if record.bus_fee == None %}
 			<td ><strong>0</strong></td>
 			{% else %}
-			<td ><strong>{{record.carpay|floatformat}}</strong></td>
+			<td ><strong>{{record.bus_fee|floatformat}}</strong></td>
 			{% endif %}{% if record.balance == None %}
 			<td ><strong>0</strong></td>
 			{% else %}

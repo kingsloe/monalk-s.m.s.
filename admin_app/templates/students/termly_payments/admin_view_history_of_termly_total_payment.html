@@ -18,7 +18,7 @@
       <tbody>
         {% for record in daily_fee_money_record %}
         <tr>
-          <td >{{record.when_made}}</td>
+          <td >{{record.date}}</td>
           <td >{{record.sum|floatformat}}</td>
           {% if record.sum3 == None or record.sum2 == None %}
           <td >0</td>
@@ -54,17 +54,17 @@
       var sum1 = parseInt('{{record.sum}}')
       var sum2 = parseInt('{{record.sum2}}')
       var sum3 = parseInt('{{record.sum3}}')
-      var when_made = '{{record.when_made}}'
+      var date = '{{record.date}}'
     '{% endif %}'
   '{% endfor %}'
   '{% for record in daily_school_fee_money_record %}'  
     '{% if forloop.last %}'
       var sum4 = parseInt('{{record.sum4}}')
-      var schoolfeesdate = '{{record.when_made}}'
+      var schoolfeesdate = '{{record.date}}'
     '{% endif %}'
   '{% endfor %}'
   if(typeof sum4 !== 'undefined'){
-     if (when_made == schoolfeesdate){
+     if (date == schoolfeesdate){
       var added = sum1+sum2+sum3+sum4
      }else{
       var added = sum1+sum2+sum3

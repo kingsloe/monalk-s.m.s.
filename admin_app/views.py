@@ -290,9 +290,9 @@ def admin_view_individual_student_info_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
     payment_record = student.payment_set.all().order_by('-id')
     daily_canteen_record = payment_record.aggregate(daily_canteen=Sum('canteen'))
-    daily_bus_record = payment_record.aggregate(daily_bus=Sum('carpay'))
+    daily_bus_record = payment_record.aggregate(daily_bus=Sum('bus_fee'))
     daily_tuition_record = payment_record.aggregate(
-        daily_tuition=Sum('schoolfees'))
+        daily_tuition=Sum('school_fees'))
     if request.method == 'POST':
         if 'delete_student' in request.POST:
             student.status = False
@@ -425,10 +425,10 @@ def admin_view_records_of_payment_view(request):
 @user_passes_test(is_admin)
 def admin_view_history_of_daily_total_payment_view(request):
 
-    daily_fee_money_record_obj = Payment.objects.filter().values('when_made').order_by(
-        '-when_made').annotate(sum=Sum('canteen'), sum2=Sum('carpay'), sum3=Sum('schoolfees'))
+    daily_fee_money_record_obj = Payment.objects.filter().values('date').order_by(
+        '-date').annotate(sum=Sum('canteen'), sum2=Sum('bus_fee'), sum3=Sum('school_fees'))
     daily_school_fee_money_record = SchoolFeesPayment.objects.filter().values(
-        'when_made').order_by('when_made').annotate(sum4=Sum('schoolfees'))
+        'date').order_by('date').annotate(sum4=Sum('school_fees'))
 
     limit_data = Paginator(daily_fee_money_record_obj, 7)
     page_number = request.GET.get('page')

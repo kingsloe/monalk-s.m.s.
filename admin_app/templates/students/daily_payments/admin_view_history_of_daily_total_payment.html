@@ -17,7 +17,7 @@
       <tbody>
         {% for record in daily_fee_money_record %}
         <tr>
-          <td >{{record.when_made}}</td>
+          <td >{{record.date}}</td>
           <td >{{record.sum|floatformat}}</td>
           {% if record.sum3 == None or record.sum2 == None %}
           <td >0</td>

@@ -4,9 +4,9 @@ import datetime
 
 
 class DailyPaymentForm(forms.ModelForm):
-    when_made = forms.DateField(initial=datetime.date.today)
+    date = forms.DateField(initial=datetime.date.today)
 
     class Meta:
         model = Payment
-        fields = ['user', 'student', 'canteen', 'carpay', 'schoolfees',
-                  'balance', 'debt', 'when_made',]
+        fields = ['user', 'student', 'canteen', 'bus_fee', 'school_fees',
+                  'balance', 'debt', 'date',]
