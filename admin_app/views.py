@@ -289,7 +289,7 @@ def admin_approve_or_decline_student_view(request, pk):
 def admin_view_individual_student_info_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
     payment_record = student.payment_set.all().order_by('-id')
-    daily_canteen_record = payment_record.aggregate(daily_canteen=Sum('pay'))
+    daily_canteen_record = payment_record.aggregate(daily_canteen=Sum('canteen'))
     daily_bus_record = payment_record.aggregate(daily_bus=Sum('carpay'))
     daily_tuition_record = payment_record.aggregate(
         daily_tuition=Sum('schoolfees'))
@@ -426,7 +426,7 @@ def admin_view_records_of_payment_view(request):
 def admin_view_history_of_daily_total_payment_view(request):
 
     daily_fee_money_record_obj = Payment.objects.filter().values('when_made').order_by(
-        '-when_made').annotate(sum=Sum('pay'), sum2=Sum('carpay'), sum3=Sum('schoolfees'))
+        '-when_made').annotate(sum=Sum('canteen'), sum2=Sum('carpay'), sum3=Sum('schoolfees'))
     daily_school_fee_money_record = SchoolFeesPayment.objects.filter().values(
         'when_made').order_by('when_made').annotate(sum4=Sum('schoolfees'))
 

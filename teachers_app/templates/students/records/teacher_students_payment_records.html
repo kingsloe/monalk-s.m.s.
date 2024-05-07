@@ -3,12 +3,12 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
-<section class="hom"> 
+<section class="table-main-body"> 
     <div class="text">
         <input type="text" class="search form-control" placeholder="Search...">
     <table class="table table-bordered border-primary results">
       <caption style="display: none;"></caption>
-      <thead class="stay">
+      <thead class="sticky-table-head">
         <tr>
           <th>Names</th>
           <th>Amount</th>
@@ -17,8 +17,8 @@
       <tbody>
         {% for payment in payments %}
         <tr>
-          <td class="tablestyle">{{payment.student}}</td>
-          <td class="tablestyle">{{payment.pay}}</td>
+          <td >{{payment.student}}</td>
+          <td >{{payment.canteen}}</td>
         </tr>
         {% endfor %}
       </tbody> 

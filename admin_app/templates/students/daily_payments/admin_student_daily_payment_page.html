@@ -16,7 +16,7 @@
       <div class="form-content">
         <h1 class="student_name">{{student}}</h1>
         <div class="form-group">
-          <input type="number" name="pay" step="any" class="form-control" id="main_amount" onkeyup="calculate_fee()">
+          <input type="number" name="canteen" step="any" class="form-control" id="main_amount" onkeyup="calculate_fee()">
         </div>
             {% if student.form_of_transportation == 'Bus' %}
             <div class="form-group">
@@ -50,7 +50,7 @@
               </div>
               {% endif %}
             {% endfor %}
-  <div class="paybtn"><button type="submit" class="btn btn-success">Pay</button></div>
+  <div><button type="submit" class="btn btn-success">Pay</button></div>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 body{
     background: #bba14f;
 }
-.hom{
+.table-main-body{
     margin-top: 75px;
 }
 h3 {
@@ -41,7 +41,7 @@ table {
     cursor: pointer;
     padding: 10px;
 }
-.pay{
+.canteen{
     background: #4caf50;
     color: #fff;
     cursor: pointer;

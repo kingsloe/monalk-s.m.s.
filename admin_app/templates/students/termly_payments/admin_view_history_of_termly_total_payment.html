@@ -3,28 +3,29 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
-<section class="hom"> 
+<section class="table-main-body"> 
     <input type="text" class="search form-control" placeholder="Search...">
     <table class="table table-bordered border-primary results">
-      <thead class="stay">
+      <caption style="display: none;"></caption>
+      <thead class="sticky-table-head">
         <tr>
-          <th class="tablestyle">Date</th>
-          <th class="tablestyle">Food Money</th>
-          <th class="tablestyle">Bus Money</th>
-          <th class="tablestyle">School Fees</th>
+          <th >Date</th>
+          <th >Food Money</th>
+          <th >Bus Money</th>
+          <th >School Fees</th>
         </tr>
       </thead>
       <tbody>
         {% for record in daily_fee_money_record %}
         <tr>
-          <td class="tablestyle">{{record.when_made}}</td>
-          <td class="tablestyle">{{record.sum|floatformat}}</td>
+          <td >{{record.when_made}}</td>
+          <td >{{record.sum|floatformat}}</td>
           {% if record.sum3 == None or record.sum2 == None %}
-          <td class="tablestyle">0</td>
-          <td class="tablestyle">0</td>
+          <td >0</td>
+          <td >0</td>
           {% else %}
-          <td class="tablestyle">{{record.sum2|floatformat}}</td>
-          <td class="tablestyle">{{record.sum3|floatformat}}</td>        
+          <td >{{record.sum2|floatformat}}</td>
+          <td >{{record.sum3|floatformat}}</td>        
           {% endif %}
           
         </tr>

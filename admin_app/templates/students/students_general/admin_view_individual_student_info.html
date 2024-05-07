@@ -155,34 +155,34 @@
 	<tbody>
 		{% for record in payment_record %}
 		<tr>
-			<td class="tablestyle"><strong>{{record.when_made}}</strong></td>
-			{% if record.pay == None %}
-			<td class="tablestyle"><strong>0</strong></td>
+			<td ><strong>{{record.when_made}}</strong></td>
+			{% if record.canteen == None %}
+			<td ><strong>0</strong></td>
 			{% else %}
-			<td class="tablestyle"><strong>{{record.pay|floatformat}}</strong></td>
+			<td ><strong>{{record.canteen|floatformat}}</strong></td>
 			{% endif %}
 			{% if record.schoolfees == None %}
-			<td class="tablestyle"><strong>0</strong></td>
+			<td ><strong>0</strong></td>
 			{% else %}
-			<td class="tablestyle"><strong>{{record.schoolfees|floatformat}}</strong></td>
+			<td ><strong>{{record.schoolfees|floatformat}}</strong></td>
 			{% endif %}
 			{% if record.carpay == None %}
-			<td class="tablestyle"><strong>0</strong></td>
+			<td ><strong>0</strong></td>
 			{% else %}
-			<td class="tablestyle"><strong>{{record.carpay|floatformat}}</strong></td>
+			<td ><strong>{{record.carpay|floatformat}}</strong></td>
 			{% endif %}{% if record.balance == None %}
-			<td class="tablestyle"><strong>0</strong></td>
+			<td ><strong>0</strong></td>
 			{% else %}
-			<td class="tablestyle"><strong>{{record.balance|floatformat}}</strong></td>
+			<td ><strong>{{record.balance|floatformat}}</strong></td>
 			{% endif %}
 			{% if record.debt == None %}
-			<td class="tablestyle"><strong>0</strong></td>
+			<td ><strong>0</strong></td>
 			{% else %}
-			<td class="tablestyle"><strong>{{record.debt|floatformat}}</strong></td>
+			<td ><strong>{{record.debt|floatformat}}</strong></td>
 			{% endif %}
 			<form action="{% url 'admin_delete_payment_from_student_profile' record.id %}" method="POST" class="deletepaymentform">
 				{% csrf_token %}
-				<td class="tablestyle"><button class="delete-payment updat btn btn-danger" name="delete_payment">Delete</button></td>
+				<td ><button class="delete-payment updat btn btn-danger" name="delete_payment">Delete</button></td>
 		</form>			
 		</tr>
 		{% endfor %}

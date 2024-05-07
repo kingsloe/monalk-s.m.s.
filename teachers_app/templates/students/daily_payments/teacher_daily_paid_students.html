@@ -3,12 +3,12 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
-<section class="hom"> 
+<section class="table-main-body"> 
     <div class="text">
         <input type="text" class="search form-control" placeholder="Search...">
         <table class="table table-bordered border-primary results">
             <caption style="display: none;"></caption>
-            <thead class="stay">
+            <thead class="sticky-table-head">
                 <tr>
                     <th>Names</th>
                     <th>Amount</th>
@@ -19,8 +19,8 @@
                 {% for student, last_payment in student_last_payments.items %}
                     {% if last_payment %}
                         <tr>
-                            <td class="tablestyle">{{student.get_name}}</td>
-                            <td class="tablestyle">{{last_payment.pay}}</td>
+                            <td >{{student.get_name}}</td>
+                            <td >{{last_payment.canteen}}</td>
                             <td>
                                 <form action="{% url 'teacher_delete_daily_paid_student' student.id %}" method="POST" class="delete_payment_form">
                                     {% csrf_token %}

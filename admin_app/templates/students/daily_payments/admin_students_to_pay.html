@@ -4,14 +4,14 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
 
-<section class="hom"> 
+<section class="table-main-body"> 
   <div class="text">
 
     <input type="text" class="search form-control" placeholder="Search...">
 
     <table class="table table-bordered border-primary results">
       <caption style="display: none;"></caption>
-      <thead class="stay">
+      <thead class="sticky-table-head">
         <tr>
           <th>Name</th>
           <th>Town</th>
@@ -22,10 +22,10 @@
       <tbody>
         {% for s in students %}
         <tr>
-          <td class="tablestyle"><strong>{{s.get_name}}</strong></td>
-          <td class="tablestyle"><strong>{{s.town}}</strong></td>
-          <td class="tablestyle"><strong>{{s.grade}}</strong></td>
-          <td class="tablestyle"><a href="{% url 'admin_student_daily_payment' s.id %}" class="btn btn-success">Payment</a></td>
+          <td ><strong>{{s.get_name}}</strong></td>
+          <td ><strong>{{s.town}}</strong></td>
+          <td ><strong>{{s.grade}}</strong></td>
+          <td ><a href="{% url 'admin_student_daily_payment' s.id %}" class="btn btn-success">Payment</a></td>
         </tr>
         {% endfor %}
       </tbody>
