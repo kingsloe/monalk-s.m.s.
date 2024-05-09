@@ -52,7 +52,7 @@
 </div>
 
 
-<table class="table table-bordered border-primary">
+<table class="table table-bordered ">
 	<caption style="display: none;"></caption>
 	<tr>
 		<th>Day</th>
@@ -93,7 +93,7 @@
 			{% endif %}
 			<form action="{% url 'admin_delete_payment_from_teacher_profile' record.id %}" method="POST" class="deletepaymentform">
 				{% csrf_token %}
-				<td ><button class="delete-payment updat btn btn-danger" name="delete_payment">Delete</button></td>
+				<td ><button class="delete-payment btn btn-danger" name="delete_payment">Delete</button></td>
 		</form>			
 		</tr>
 		{% endfor %}

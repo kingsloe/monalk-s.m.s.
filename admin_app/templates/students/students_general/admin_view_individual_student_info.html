@@ -2,126 +2,122 @@
 {% extends 'admin_base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/admin.css' %}">
-<link rel="stylesheet" href="{% static 'css/tables.css' %}">
-
-
-
+<div class="spacer"></div>
 <div class="container">
-	
 	<div class="row">
 		<h1 class="hedy">This is {{student.get_name}}</h1>
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-blue order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Id</h6>
-			<i class="fas fa-user-tie f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.roll}}</span></p>
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-blue order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Id</h6>
+					<i class="fas fa-user-tie f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.roll}}</span></p>
+				</div>
+			</div>
 		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-green order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Date of Admission</h6>
+					<i class="fas fa-mobile-alt f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.date_of_admission}}</span></p>
+				</div>
+			</div>
 		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Name</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.get_name}}</span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-pink order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Date of Birth</h6>
+					<i class="fas fa-dollar f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.date_of_birth}}</span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Gender</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.gender}}</span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Mother</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.mother}}</span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Fahter</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.father}}</span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Phone</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.mobile}}</span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Class</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.grade}}</span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Town</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.town}}</span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Fee</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.fee}}</span></p>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-green order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Date of Admission</h6>
-			<i class="fas fa-mobile-alt f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.date_of_admission}}</span></p>
-
-		</div>
-		</div>
-	</div>
-
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-yellow order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Name</h6>
-			<i class="fas fa-list-ol f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.get_name}}</span></p>
-		</div>
-		</div>
-	</div>
-
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-pink order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Date of Birth</h6>
-			<i class="fas fa-dollar f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.date_of_birth}}</span></p>
-		</div>
-		</div>
-	</div>
-
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-yellow order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Gender</h6>
-			<i class="fas fa-list-ol f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.gender}}</span></p>
-		</div>
-		</div>
-	</div>
-
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-yellow order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Mother</h6>
-			<i class="fas fa-list-ol f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.mother}}</span></p>
-		</div>
-		</div>
-	</div>
-
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-yellow order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Fahter</h6>
-			<i class="fas fa-list-ol f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.father}}</span></p>
-		</div>
-		</div>
-	</div>
-
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-yellow order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Phone</h6>
-			<i class="fas fa-list-ol f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.mobile}}</span></p>
-		</div>
-		</div>
-	</div>
-
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-yellow order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Class</h6>
-			<i class="fas fa-list-ol f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.grade}}</span></p>
-		</div>
-		</div>
-	</div>
-
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-yellow order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Town</h6>
-			<i class="fas fa-list-ol f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.town}}</span></p>
-		</div>
-		</div>
-	</div>
-
-	<div class="col-md-4 col-xl-3">
-		<div class="card bg-c-yellow order-card">
-		<div class="card-block">
-			<h6 class="m-b-20">Fee</h6>
-			<i class="fas fa-list-ol f-left"></i>
-			<p><span style="font-size: 20px;padding-left: 6px;">{{student.fee}}</span></p>
-		</div>
-		</div>
-	</div>
-	</div>
 	<div class="update">
 		<a href="{% url 'admin_update_individual_student_info' student.id %}" class="updat btn btn-success">Update</a>
 		<form method="POST" id="deletestudentform">
@@ -129,6 +125,7 @@
 			<button id="deletestudent" class="updat btn btn-danger">Delete</button>
 		</form>
 	</div>
+
 </div>
 
 <div class="last-record-of-money">
@@ -140,63 +137,63 @@
 		{% endif %}
 	{% endfor %}
 </div>
+<div class="table-responsive">
+	<table class="table table-bordered">
+		<caption style="display: none;"></caption>
+		<thead>
+			<tr>
+				<th>Day</th>
+				<th>Canteen</th>
+				<th>Tuition</th>
+				<th>Bus</th>
+				<th>Balance</th>
+				<th>Debt</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for payment_record in payment_records %}
+			<tr>
+				<td ><strong>{{payment_record.date}}</strong></td>
+				{% if payment_record.canteen == None %}
+					<td ><strong>0</strong></td>
+				{% else %}
+					<td ><strong>{{payment_record.canteen|floatformat}}</strong></td>
+				{% endif %}
+					
+				{% if payment_record.school_fees == None %}
+					<td ><strong>0</strong></td>
+				{% else %}
+					<td ><strong>{{payment_record.school_fees|floatformat}}</strong></td>
+				{% endif %}
 
-<table class="table table-bordered border-primary">
-	<caption style="display: none;"></caption>
-	<tr>
-		<th>Day</th>
-		<th>Canteen</th>
-		<th>Tuition</th>
-		<th>Bus</th>
-		<th>Balance</th>
-		<th>Debt</th>
-		<th>User</th>
-		<th>Delete</th>
-	</tr>
-	<tbody>
-		{% for payment_record in payment_records %}
-		<tr>
-			<td ><strong>{{payment_record.date}}</strong></td>
-			{% if payment_record.canteen == None %}
-				<td ><strong>0</strong></td>
-			{% else %}
-				<td ><strong>{{payment_record.canteen|floatformat}}</strong></td>
-			{% endif %}
+				{% if payment_record.bus_fee == None %}
+					<td ><strong>0</strong></td>
+				{% else %}
+					<td ><strong>{{payment_record.bus_fee|floatformat}}</strong></td>
+				{% endif %}
+
+				{% if payment_record.balance == None %}
+					<td ><strong>0</strong></td>
+				{% else %}
+					<td ><strong>{{payment_record.balance|floatformat}}</strong></td>
+				{% endif %}
 				
-			{% if payment_record.school_fees == None %}
-				<td ><strong>0</strong></td>
-			{% else %}
-				<td ><strong>{{payment_record.school_fees|floatformat}}</strong></td>
-			{% endif %}
+				{% if payment_record.debt == None %}
+					<td ><strong>0</strong></td>
+				{% else %}
+					<td ><strong>{{payment_record.debt|floatformat}}</strong></td>
+				{% endif %}
 
-			{% if payment_record.bus_fee == None %}
-				<td ><strong>0</strong></td>
-			{% else %}
-				<td ><strong>{{payment_record.bus_fee|floatformat}}</strong></td>
-			{% endif %}
-
-			{% if payment_record.balance == None %}
-				<td ><strong>0</strong></td>
-			{% else %}
-				<td ><strong>{{payment_record.balance|floatformat}}</strong></td>
-			{% endif %}
-			
-			{% if payment_record.debt == None %}
-				<td ><strong>0</strong></td>
-			{% else %}
-				<td ><strong>{{payment_record.debt|floatformat}}</strong></td>
-			{% endif %}
-
-			<td>{{payment_record.user}}</td>
-
-			<form action="{% url 'admin_delete_payment_from_student_profile' payment_record.id %}" method="POST" class="deletepaymentform">
-				{% csrf_token %}
-				<td ><button class="delete-payment updat btn btn-danger" name="delete_payment">Delete</button></td>
-		</form>			
-		</tr>
-		{% endfor %}
+				<form action="{% url 'admin_delete_payment_from_student_profile' payment_record.id %}" method="POST" class="deletepaymentform">
+					{% csrf_token %}
+					<td ><button class="delete-payment btn btn-danger" name="delete_payment">Delete</button></td>
+			</form>			
+			</tr>
+			{% endfor %}
 		</tbody>
-</table>	
+	</table>
+</div>
 
 <script>
 	var canteen = parseInt('{{daily_canteen_record.daily_canteen}}')
