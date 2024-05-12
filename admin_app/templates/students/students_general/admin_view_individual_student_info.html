@@ -137,12 +137,17 @@
 		{% endif %}
 	{% endfor %}
 </div>
+
+
+<input type="text" class="search form-control" placeholder="Search...">
 <div class="table-responsive">
-	<table class="table table-bordered">
+	<table class="table table-bordered results">
 		<caption style="display: none;"></caption>
 		<thead>
 			<tr>
 				<th>Day</th>
+				<th>User</th>
+				<th>Amount</th>
 				<th>Canteen</th>
 				<th>Tuition</th>
 				<th>Bus</th>
@@ -155,6 +160,8 @@
 			{% for payment_record in payment_records %}
 			<tr>
 				<td ><strong>{{payment_record.date}}</strong></td>
+				<td ><strong>{{payment_record.user}}</strong></td>
+				<td ><strong>{{payment_record.amount}}</strong></td>
 				{% if payment_record.canteen == None %}
 					<td ><strong>0</strong></td>
 				{% else %}
@@ -194,6 +201,7 @@
 		</tbody>
 	</table>
 </div>
+
 
 <script>
 	var canteen = parseInt('{{daily_canteen_record.daily_canteen}}')

@@ -426,7 +426,9 @@ def admin_view_records_of_payment_view(request):
 def admin_view_history_of_daily_total_payment_view(request):
 
     daily_fee_money_record_obj = Payment.objects.filter().values('date').order_by(
-        '-date').annotate(sum=Sum('canteen'), sum2=Sum('bus_fee'), sum3=Sum('school_fees'))
+        '-date').annotate(sum=Sum('amount'), sum2=Sum('bus_fee'), sum3=Sum('school_fees'))
+    print(sum)
+    
     daily_school_fee_money_record = SchoolFeesPayment.objects.filter().values(
         'date').order_by('date').annotate(sum4=Sum('school_fees'))
 
@@ -450,9 +452,14 @@ def admin_view_history_of_daily_total_payment_view(request):
 @user_passes_test(is_admin)
 def admin_daily_paid_students_view(request):
     students = StudentInfo.objects.filter(status=True, checkifpaiddaily=True)
+    student_last_payments = {}
+
+    for student in students:
+        last_payment = Payment.objects.filter(student=student).last()
+        student_last_payments[student] = last_payment
 
     context = {
-        'students': students
+        'student_last_payments': student_last_payments
     }
     return render(request, 'students/daily_payments/admin_daily_paid_students.html', context)
 
@@ -615,7 +622,3 @@ def admin_students_with_debt_view(request):
 
 
 # ||||||||||||||||||||||| END OF ALL STUDENTS PAYMENT |||||||||||||||||||||||||||||||
-
-
-
-# ||||||||||||||||||||||| END OF ALL ABOUT THE STUDENTS |||||||||||||||||||||||||||||

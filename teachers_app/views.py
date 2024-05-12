@@ -5,6 +5,7 @@ from .models import TeacherInfo
 from students_app.models import StudentInfo, DailySchoolFees
 from payment_app.forms import DailyPaymentForm
 from payment_app.models import Payment
+from notice_app.models import Notice
 # Create your views here.
 
 """
@@ -18,12 +19,14 @@ def teacher_homepage_view(request):
         status=True, user_id=request.user.id
     )
     payments = Payment.objects.filter(user=request.user)
+    notices = Notice.objects.all()
     context = {
         'name': teacherdata[0].get_name,
         'salary': teacherdata[0].salary,
         'joindate': teacherdata[0].joindate,
         'mobile': teacherdata[0].mobile,
         'payments': payments,
+        'notices': notices,
     }
     return render(request, 'teacher_homepage.html', context)
 

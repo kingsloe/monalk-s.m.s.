@@ -4,12 +4,11 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
 
-<section class="table-main-body"> 
-    <div class="text">
-    <input type="text" class="search form-control" placeholder="Search...">
-    <table class="table table-bordered results">
-      <caption style="display: none;"></caption>
-        <thead class="sticky-table-head">
+<input type="text" class="search form-control" placeholder="Search...">
+<div class="table-responsive"> 
+  <table class="table table-bordered results">
+    <caption style="display: none;"></caption>
+    <thead>
         <tr>    
           <th >Names</th>
           <th >Fees</th>
@@ -33,7 +32,6 @@
       </tbody> 
     </table> 
     </div>
-</section>
 <center>
     {%if records.has_previous %}
         <a href="?page={{records.previous_page_number}}"><button class="btn btn-success"><i>Previous</i></button></a> {# link to the prev page #}

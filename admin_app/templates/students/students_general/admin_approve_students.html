@@ -4,38 +4,36 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
 
-<section class="table-main-body"> 
-    <div class="text">
-    
-        <input type="text" class="search form-control" placeholder="Search...">
-        <table class="table table-bordered results">
-            <caption style="display: none;"></caption>
-        <thead class="sticky-table-head">
-        <tr>
-          <th>Name</th>
-          <th>Class</th>
-          <th>Contact</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
+<input type="text" class="search form-control" placeholder="Search...">
+<div class="table-responsive"> 
+    <table class="table table-bordered results">
+        <caption style="display: none;"></caption>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Contact</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+    <tbody>
         {% for s in students %}
         <tr>
-          <td ><strong>{{s.get_name}}</strong></td>
-          <td ><strong>{{s.grade}}</strong></td>
-          <td ><strong>{{s.mobile}}</strong></td>
-          <td >
-            <form action="{% url 'admin_approve_or_decline_student' s.id %}" method="POST" class="approve_or_decline">
-                {% csrf_token %}
-                <button class="btn btn-primary btn-xs approvebtn" name="approve"><span class="glyphicon glyphicon-edit"></span></button>
-                <button class="btn btn-danger btn-xs declinebtn" name="decline"><span class="glyphicon glyphicon-trash"></span></button>
-        </form></td>
+            <td><strong>{{s.get_name}}</strong></td>
+            <td><strong>{{s.grade}}</strong></td>
+            <td><strong>{{s.mobile}}</strong></td>
+            <td>
+                <form action="{% url 'admin_approve_or_decline_student' s.id %}" method="POST" class="approve_or_decline">
+                    {% csrf_token %}
+                    <button class="btn btn-primary btn-xs approvebtn" name="approve"><span class="glyphicon glyphicon-edit"></span></button>
+                    <button class="btn btn-danger btn-xs declinebtn" name="decline"><span class="glyphicon glyphicon-trash"></span></button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
         </tbody>
-        </table>
-      </div>
-    </section>
+    </table>
+</div>
 
     <script>
         bttn1 = document.getElementsByClassName('approvebtn');

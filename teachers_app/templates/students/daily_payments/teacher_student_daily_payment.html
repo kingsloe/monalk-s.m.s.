@@ -16,7 +16,7 @@
       <div class="form-content">
         <h1 class="student_name">{{student}}</h1>
         <div class="form-group">
-          <input type="number" step="any" name="canteen" class="form-control" id="main_amount" onkeyup="calculate_fee()">
+          <input type="number" step="any" name="amount" class="form-control" id="main_amount" onkeyup="calculate_fee()">
         </div>
             {% if student.form_of_transportation == 'Bus' %}
             <div class="form-group">
