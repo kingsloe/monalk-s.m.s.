@@ -47,9 +47,9 @@
 	</div>
 
 </div>
-
+<input type="text" class="search form-control" placeholder="Search...">
 <div class="table-responsive">
-	<table class="table table-bordered">
+	<table class="table table-bordered results">
 		<caption style="display: none;"></caption>
 		<thead>
 			<tr>
@@ -60,6 +60,17 @@
 				<th>Debt</th>
 			</tr>
 		</thead>
+		<tbody>
+			{% for payment in payments %}
+				<tr>
+					<td>{{payment.date}}</td>
+					<td>{{payment.student}}</td>
+					<td>{{payment.amount}}</td>
+					<td>{{payment.balance}}</td>
+					<td>{{payment.debt}}</td>
+				</tr>
+            {% endfor %}
+		</tbody>
 	</table>
 </div>
 

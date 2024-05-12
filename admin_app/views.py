@@ -140,6 +140,9 @@ def admin_add_teacher_view(request):
 @user_passes_test(is_admin)
 def admin_view_individual_teacher_info_view(request, pk):
     teacher = TeacherInfo.objects.get(id=pk)
+    payments = Payment.objects.filter(user_id=teacher.user_id)
+    print(payments)
+
     if request.method == 'POST':
         if 'delete_teacher' in request.POST:
             teacher.status = False
@@ -150,7 +153,8 @@ def admin_view_individual_teacher_info_view(request, pk):
             messages.error(request, 'Could not delete teacher. Please try again.')
             return redirect('admin_view_individual_teacher_info', pk)
     context = {
-        'teacher' : teacher
+        'teacher' : teacher,
+        'payments': payments,
     }
     return render(request, 'teachers/admin_view_individual_teacher_info.html', context)
 
