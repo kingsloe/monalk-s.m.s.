@@ -104,7 +104,7 @@ h2{
   text-align: center;
   color: #ffffff;
   position: relative;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 a{
@@ -121,9 +121,14 @@ h3 {
   font-weight: bold;
 }
 .update, .updat{
-  margin: 0 200% 0 45%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+.delete-payment{
   display: inline-flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 @media(max-width: 615px) {

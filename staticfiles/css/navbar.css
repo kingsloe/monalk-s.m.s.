@@ -73,6 +73,15 @@ body{
     top: 98px;
 }
 
+.logout_button {
+    color: #eb1a1a; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    margin-top: 15px; 
+    margin-right: 10px;
+}
+
 @media(max-width: 767px){
     #myNavbar{
     background: -webkit-linear-gradient(
@@ -82,11 +91,17 @@ body{
 		#f6f2c0 50%,
 		#f6e27a 55%,
 		#cb9b51 78%,
-		#462523 100%
+		#cb9b51 100%
         );
     } 
     .navbar-brand>img{
         display: flex;
+    }
+
+    .navbar-right {
+        position: absolute; /* Absolute positioning */
+        bottom: 10px; /* Place it 10px from the bottom */
+        /* right: 10px; Align it 10px from the right */
     }
 }
 
