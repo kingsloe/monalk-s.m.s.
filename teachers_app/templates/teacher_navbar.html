@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/teacher_nav_dropdown.css' %}" />
 <nav class="navbar navbar-inverse sidebarNavigation navbar-fixed-top navbar-custom" data-sidebarclass="navbar-inverse" >
     <div class="container-fluid">
       <div class="navbar-header">
@@ -12,31 +11,47 @@
         <a class="navbar-brand" href="{% url 'homepage' %}"><img src="{% static '/images/brand.webp' %}" alt="" height="55px" class="mine"></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
+
         <ul class="nav navbar-nav">
+
           <li>
-            <a href="{% url 'teacher-homepage' %}" style="color: #131313">
-              <span class="glyphicon glyphicon-home"></span>
+            <a href="{% url 'teacher-homepage' %}" style="color: #131313">              
               <b> Dashboard</b>
+              <span class="glyphicon glyphicon-home"></span>
             </a>
           </li>
-          <li class="dropdown"><a href="#" style="color: #131313"><b>Payments  </b><span class="fa fa-caret-down"></span></a>
-            <div class="dropdown-content">
-              <a href="{% url 'teacher_students_to_pay' %}"><b>DailyPayment</b></a>
+
+          <li>
+            <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #131313; background: none;">
+              <b>Payments  </b><span class="fa fa-caret-down"></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'teacher_students_to_pay' %}" style="margin-left: 15px; color: #131313"><i class="fa-solid fa-arrow-right"></i> DailyPayment</a>
             </div>
           </li>
-          <li class="dropdown"><a href="#" style="color: #131313"><b>Records  </b><span class="fa fa-caret-down"></span></a>
-            <div class="dropdown-content">
-              <a href="{% url 'teacher_students_payment_records' %}"><b>FullRecords</b></a>
+
+          <li>
+            <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #131313; background: none;">
+              <b>Records  </b><span class="fa fa-caret-down">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'teacher_students_payment_records' %}" style="margin-left: 15px; color: #131313"><i class="fa-solid fa-arrow-right"></i> FullRecords</a>
             </div>
           </li>
+
         </ul>
+
         <ul class="nav navbar-nav navbar-right">    
-          <li><form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="logout_button">
-              <span class="glyphicon glyphicon-user"></span><b> Logout </b>
-          </form></li>
+          <li>
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="logout_button">
+                </span><b> Logout </b><span class="glyphicon glyphicon-user"></span>
+              </button>
+            </form>
+          </li>
         </ul>
+
       </div>
     </div>
   </nav>
