@@ -140,6 +140,11 @@ def admin_add_teacher_view(request):
 @user_passes_test(is_admin)
 def admin_view_individual_teacher_info_view(request, pk):
     teacher = TeacherInfo.objects.get(id=pk)
+    payments = Payment.objects.filter(user_id=teacher.user_id).order_by('-date')
+    daily_fees_taken = payments.values('date').order_by(
+        '-date').annotate(sum=Sum('amount'))
+    all_payments_taken = payments.aggregate(Sum('amount'))['amount__sum']
+
     if request.method == 'POST':
         if 'delete_teacher' in request.POST:
             teacher.status = False
@@ -150,7 +155,10 @@ def admin_view_individual_teacher_info_view(request, pk):
             messages.error(request, 'Could not delete teacher. Please try again.')
             return redirect('admin_view_individual_teacher_info', pk)
     context = {
-        'teacher' : teacher
+        'teacher' : teacher,
+        'payments': payments,
+        'daily_fees_taken': daily_fees_taken,
+        'all_payments_taken': all_payments_taken
     }
     return render(request, 'teachers/admin_view_individual_teacher_info.html', context)
 
@@ -288,11 +296,11 @@ def admin_approve_or_decline_student_view(request, pk):
 @user_passes_test(is_admin)
 def admin_view_individual_student_info_view(request, pk):
     student = StudentInfo.objects.get(id=pk)
-    payment_record = student.payment_set.all().order_by('-id')
-    daily_canteen_record = payment_record.aggregate(daily_canteen=Sum('pay'))
-    daily_bus_record = payment_record.aggregate(daily_bus=Sum('carpay'))
-    daily_tuition_record = payment_record.aggregate(
-        daily_tuition=Sum('schoolfees'))
+    payment_records = student.payment_set.all().order_by('-id')
+    daily_canteen_record = payment_records.aggregate(daily_canteen=Sum('canteen'))
+    daily_bus_record = payment_records.aggregate(daily_bus=Sum('bus_fee'))
+    daily_tuition_record = payment_records.aggregate(
+        daily_tuition=Sum('school_fees'))
     if request.method == 'POST':
         if 'delete_student' in request.POST:
             student.status = False
@@ -305,7 +313,7 @@ def admin_view_individual_student_info_view(request, pk):
 
     context = {
         'student': student,
-        'payment_record': payment_record,
+        'payment_records': payment_records,
         'daily_canteen_record': daily_canteen_record,
         'daily_bus_record': daily_bus_record,
         'daily_tuition_record': daily_tuition_record,
@@ -425,10 +433,11 @@ def admin_view_records_of_payment_view(request):
 @user_passes_test(is_admin)
 def admin_view_history_of_daily_total_payment_view(request):
 
-    daily_fee_money_record_obj = Payment.objects.filter().values('when_made').order_by(
-        '-when_made').annotate(sum=Sum('pay'), sum2=Sum('carpay'), sum3=Sum('schoolfees'))
+    daily_fee_money_record_obj = Payment.objects.filter().values('date').order_by(
+        '-date').annotate(sum=Sum('amount'), sum2=Sum('bus_fee'), sum3=Sum('school_fees'))
+        
     daily_school_fee_money_record = SchoolFeesPayment.objects.filter().values(
-        'when_made').order_by('when_made').annotate(sum4=Sum('schoolfees'))
+        'date').order_by('date').annotate(sum4=Sum('school_fees'))
 
     limit_data = Paginator(daily_fee_money_record_obj, 7)
     page_number = request.GET.get('page')
@@ -450,9 +459,14 @@ def admin_view_history_of_daily_total_payment_view(request):
 @user_passes_test(is_admin)
 def admin_daily_paid_students_view(request):
     students = StudentInfo.objects.filter(status=True, checkifpaiddaily=True)
+    student_last_payments = {}
+
+    for student in students:
+        last_payment = Payment.objects.filter(student=student).last()
+        student_last_payments[student] = last_payment
 
     context = {
-        'students': students
+        'student_last_payments': student_last_payments
     }
     return render(request, 'students/daily_payments/admin_daily_paid_students.html', context)
 
@@ -615,7 +629,3 @@ def admin_students_with_debt_view(request):
 
 
 # ||||||||||||||||||||||| END OF ALL STUDENTS PAYMENT |||||||||||||||||||||||||||||||
-
-
-
-# ||||||||||||||||||||||| END OF ALL ABOUT THE STUDENTS |||||||||||||||||||||||||||||

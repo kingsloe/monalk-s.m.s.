@@ -3,12 +3,11 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/tables.css' %}">
-<section class="hom"> 
-    <div class="text">
-    
-        <input type="text" class="search form-control" placeholder="Search...">
-        <table class="table table-bordered border-primary results">
-            <thead>
+<input type="text" class="search form-control" placeholder="Search...">
+<div class="table-responsive"> 
+  <table class="table table-bordered results">
+    <caption style="display: none;"></caption>
+    <thead>
                 <tr>
                     <th>Name</th>
                     <th>Contact</th>
@@ -20,14 +19,13 @@
             <tbody class="results">
                 {% for teacher in applied_teachers %}
                 <tr>
-                    <td class="tablestyle"><strong><a href="{% url 'admin_update_individual_teacher_info' teacher.id %}" id="std_sty">{{teacher.get_name|title}}</a></strong></td>
-                    <td class="tablestyle"><strong>{{teacher.mobile}}</strong></td>
-                    <td class="tablestyle"><strong>${{teacher.salary}}</strong></td>
-                    <td class="tablestyle"><strong>{{teacher.joindate}}</strong></td>
+                    <td ><strong><a href="{% url 'admin_update_individual_teacher_info' teacher.id %}" id="std_sty">{{teacher.get_name|title}}</a></strong></td>
+                    <td ><strong>{{teacher.mobile}}</strong></td>
+                    <td ><strong>${{teacher.salary}}</strong></td>
+                    <td ><strong>{{teacher.joindate}}</strong></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>  
-</section>
 {% endblock content %}

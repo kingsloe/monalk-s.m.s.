@@ -3,33 +3,39 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
-<section class="hom"> 
-    <div class="text">
-        <input type="text" class="search form-control" placeholder="Search...">
-    <table class="table table-bordered border-primary results">
+
+<input type="text" class="search form-control" placeholder="Search...">
+
+<div class="table-responsive"> 
+    <table class="table table-bordered results">
       <caption style="display: none;"></caption>
-      <thead class="stay">
-        <tr>
-          <th>Names</th>
-          <th>Reset</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for student in students %}
-        <tr>
-          <td class="tablestyle">{{student.get_name}}</td>
-          <td>
-          <form action="{% url 'admin_delete_daily_paid_student' student.id %}" method="POST" class="delete_payment_form">
-            {% csrf_token %}
-            <button class="btn btn-danger delete">Reset</button>
-        </form>
-    </td>
-        </tr>
-        {% endfor %}
-      </tbody> 
-    </table> 
-    </div>
-</section>
+        <thead>
+          <tr>
+            <th>Names</th>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Reset</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student, last_payment in student_last_payments.items %}
+            {% if last_payment %}
+              <tr>
+                <td>{{student.get_name}}</td>
+                <td>{{last_payment.user}}</td>
+                <td>{{last_payment.amount}}</td>
+                <td>
+                  <form action="{% url 'admin_delete_daily_paid_student' student.id %}" method="POST" class="delete_payment_form">
+                    {% csrf_token %}
+                    <button class="btn btn-danger delete">Reset</button>
+                  </form>
+                </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody> 
+      </table> 
+  </div>
 
 <script>
     bttn1 = document.getElementsByClassName('delete');

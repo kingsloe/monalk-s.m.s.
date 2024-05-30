@@ -4,14 +4,11 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
 
-<section class="hom"> 
-  <div class="text">
-
-    <input type="text" class="search form-control" placeholder="Search...">
-
-    <table class="table table-bordered border-primary results">
-      <caption style="display: none;"></caption>
-      <thead class="stay">
+<input type="text" class="search form-control" placeholder="Search...">
+<div class="table-responsive"> 
+  <table class="table table-bordered results">
+    <caption style="display: none;"></caption>
+    <thead>
         <tr>
           <th>Name</th>
           <th>Town</th>
@@ -22,16 +19,16 @@
       <tbody>
         {% for student in students %}
         <tr>
-          <td class="tablestyle"><strong>{{student.get_name}}</strong></td>
-          <td class="tablestyle"><strong>{{student.town}}</strong></td>
-          <td class="tablestyle"><strong>{{student.grade}}</strong></td>
-          <td class="tablestyle"><a href="{% url 'teacher_student_daily_payment' student.id %}" class="btn btn-success">Payment</a></td>
+          <td ><strong>{{student.get_name}}</strong></td>
+          <td ><strong>{{student.town}}</strong></td>
+          <td ><strong>{{student.grade}}</strong></td>
+          <td ><a href="{% url 'teacher_student_daily_payment' student.id %}" class="btn btn-success">Payment</a></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
-</section>
+
 <div class="text-center">
     <button class="btn btn-success resetbtn"><a href="{% url 'teacher_daily_paid_students' %}">Paid Students</a></button>
 </div>

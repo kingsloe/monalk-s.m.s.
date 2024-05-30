@@ -1,211 +1,188 @@
-<script>
 
-  // |||||||||||||||||||| CALCULATE EVERYTHING ||||||||||||||||
-  if('{{student.payment_method}}' == 'School_Fees_Aside'){
-    '{% for i in student_pay%}'
-    '{% if forloop.last %}'
-    document.getElementById('debt').defaultValue = '{{i.depth}}'
-    '{% endif %}'
-    '{% endfor %}'
-  }
-  function trying(){
-    const SCHOOL_FEES = 3;
-    // const CANTEEN = 2;
-    const BUSS_ADAMSU = 3;
-    const ADAMSU_ALL_NCON = 6;
-    const ADAMSU_WALK_NCON = 3;
-    const BUSS_MPUASU = 4;
-    const MPUASU_ALL_NCON = 7;
+<div class="container">
+	<div class="row">
+		<h1 class="hedy">This is {{student.get_name}}</h1>
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-blue order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Id</h6>
+					<i class="fas fa-user-tie f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.roll}}</span></p>
+				</div>
+			</div>
+		</div>
 
-    const BUSS_KOFITIA = 5;
-    const KOFITIA_ALL_NCON = 8;
-    const ADAMSU_ALL_NCON_ASA = 3;
-    const ADAMSU_WALK_NCON_ASA  = 2;
-    const MPUASU_ALL_NCON_ASA  = 4;
-    const KOFITIA_ALL_NCON_ASA  = 5;
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-green order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Date of Admission</h6>
+					<i class="fas fa-mobile-alt f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.date_of_admission}}</span></p>
+				</div>
+			</div>
+		</div>
 
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Name</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.get_name}}</span></p>
+				</div>
+			</div>
+		</div>
 
-    // const SCHOOL_FEES = 3;
-    // const CANTEEN = 2;
-    // const BUSS_ADAMSU = 2;
-    // const ADAMSU_ALL_NCON = 7;
-    // const ADAMSU_WALK_NCON = 5;
-    // const BUSS_MPUASU = 3;
-    // const MPUASU_ALL_NCON = 8;
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-pink order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Date of Birth</h6>
+					<i class="fas fa-dollar f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.date_of_birth}}</span></p>
+				</div>
+			</div>
+		</div>
 
-    // const BUSS_KOFITIA = 4;
-    // const KOFITIA_ALL_NCON = 9;
-    // const ADAMSU_ALL_NCON_ASA = 4;
-    // const ADAMSU_WALK_NCON_ASA  = 2;
-    // const MPUASU_ALL_NCON_ASA  = 5;
-    // const KOFITIA_ALL_NCON_ASA  = 6;
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Gender</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.gender}}</span></p>
+				</div>
+			</div>
+		</div>
 
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Mother</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.mother}}</span></p>
+				</div>
+			</div>
+		</div>
 
-    const ALL_PERCENT = 100;
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Fahter</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.father}}</span></p>
+				</div>
+			</div>
+		</div>
 
-    const ENTERED = document.getElementById('main_amount');
-    const FOOD = document.getElementById('food');
-    const CAR = document.getElementById('car');
-    const FEES = document.getElementById('fees');
-    const MAIN_VALUE = parseFloat(ENTERED.value);
-    const RESIDENCE = '{{student.residence}}';
-    const TRANSPORTATION = '{{student.form_of_transportation}}';
-    const METHOD = '{{student.payment_method}}';
-    const CATEGORY = '{{student.payment_category}}';
-    const BALANCE = '{{student.balance}}';
-    const DEPT = document.getElementById('dept');
-    if( METHOD == 'Pay_Per_Day' ){
-      if(RESIDENCE == 'Adamsu'){
-        // ||||||||||||| FROM ADAMSU AND PAY EVERYTHING |||||||||||||||||||||||||
-        if(CATEGORY == 'Pay_Everything'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss, school_fees] = [(CANTEEN/ADAMSU_ALL_NCON)*ALL_PERCENT, (BUSS_ADAMSU/ADAMSU_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_ALL_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
-          }    
-        }else if(CATEGORY == 'Considered'){
-          if(TRANSPORTATION == 'Bus'){           
-            let[canteen, buss, school_fees] = [(CANTEEN/ADAMSU_ALL_NCON)*ALL_PERCENT, (BUSS_ADAMSU/ADAMSU_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_ALL_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;             
-          }
-        }
-      }else if(RESIDENCE == 'Mpuasu' || RESIDENCE == 'Dwenem' || RESIDENCE == 'Bodaa'){
-        if(CATEGORY == 'Pay_Everything'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss, school_fees] = [(CANTEEN/MPUASU_ALL_NCON)*ALL_PERCENT, (BUSS_MPUASU/MPUASU_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/MPUASU_ALL_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;       
-          }
-        }else if(CATEGORY == 'Considered'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss, school_fees] = [(CANTEEN/MPUASU_ALL_NCON)*ALL_PERCENT, (BUSS_MPUASU/MPUASU_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/MPUASU_ALL_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
-          }
-        }
-      }else if(RESIDENCE == 'Kofitia' || RESIDENCE == 'Adiokor1' || RESIDENCE == 'Adiokor2' || RESIDENCE == 'Zezera' || RESIDENCE == 'Kwamepim'){
-        // COMEBACK TO U
-        if(CATEGORY == 'Pay_Everything'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss, school_fees] = [(CANTEEN/KOFITIA_ALL_NCON)*ALL_PERCENT, (BUSS_KOFITIA/KOFITIA_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/KOFITIA_ALL_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-            if (MAIN_VALUE % 9 == 0 || MAIN_VALUE % 3 == 0){
-            FEES.value = Math.round((school_fees/ALL_PERCENT)*MAIN_VALUE);
-            }else{
-              FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
-            }
-          }else if(TRANSPORTATION == 'Walk'){
-            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;          
-            }
-        }else if(CATEGORY == 'Considered'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss, school_fees] = [(CANTEEN/KOFITIA_ALL_NCON)*ALL_PERCENT, (BUSS_KOFITIA/KOFITIA_ALL_NCON)*ALL_PERCENT, (SCHOOL_FEES/KOFITIA_ALL_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let[canteen, school_fees] = [(CANTEEN/ADAMSU_WALK_NCON)*ALL_PERCENT, (SCHOOL_FEES/ADAMSU_WALK_NCON)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            FEES.value = (school_fees/ALL_PERCENT)*MAIN_VALUE;
-          }
-        }
-      }
-    }else if( METHOD == 'School_Fees_Aside'){
-      if(RESIDENCE == 'Adamsu'){
-        // ||||||||||||| FROM ADAMSU AND PAY EVERYTHING |||||||||||||||||||||||||
-        if(CATEGORY == 'Pay_Everything'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss] = [(CANTEEN/ADAMSU_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_ADAMSU/ADAMSU_ALL_NCON_ASA)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            FOOD.value = MAIN_VALUE;              
-          }    
-        }else if(CATEGORY == 'Considered'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss] = [(CANTEEN/ADAMSU_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_ADAMSU/ADAMSU_ALL_NCON_ASA)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-          }
-        }
-      }else if(RESIDENCE == 'Mpuasu' || RESIDENCE == 'Dwenem' || RESIDENCE == 'Bodaa'){
-        if(CATEGORY == 'Pay_Everything'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss] = [(CANTEEN/MPUASU_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_MPUASU/MPUASU_ALL_NCON_ASA)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-          }
-        }else if(CATEGORY == 'Considered'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss] = [(CANTEEN/MPUASU_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_MPUASU/MPUASU_ALL_NCON_ASA)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-          }
-        }
-      }else if(RESIDENCE == 'Kofitia' || RESIDENCE == 'Adiokor1' || RESIDENCE == 'Adiokor2' || RESIDENCE == 'Zezera' || RESIDENCE == 'Kwamepim'){
-        if(CATEGORY == 'Pay_Everything'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss] = [(CANTEEN/KOFITIA_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_KOFITIA/KOFITIA_ALL_NCON_ASA)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-          }
-        }else if(CATEGORY == 'Considered'){
-          if(TRANSPORTATION == 'Bus'){
-            let[canteen, buss] = [(CANTEEN/KOFITIA_ALL_NCON_ASA)*ALL_PERCENT, (BUSS_KOFITIA/KOFITIA_ALL_NCON_ASA)*ALL_PERCENT];
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-            CAR.value = (buss/ALL_PERCENT)*MAIN_VALUE;
-          }else if(TRANSPORTATION == 'Walk'){
-            let canteen = (CANTEEN/ADAMSU_WALK_NCON_ASA)*ALL_PERCENT;
-            FOOD.value = (canteen/ALL_PERCENT)*MAIN_VALUE;
-          }
-        }
-      }
-    }
-  }
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Phone</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.mobile}}</span></p>
+				</div>
+			</div>
+		</div>
 
-</script>
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Class</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.grade}}</span></p>
+				</div>
+			</div>
+		</div>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Town</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.town}}</span></p>
+				</div>
+			</div>
+		</div>
 
-    '{% for i in student_pay %}'
-      '{% if forloop.last %}'
-        document.getElementById('debt').defaultValue = '{{i.debt}}'
-        document.getElementById('balance').defaultValue = '{{i.balance}}'
-      '{% endif %}'
-    '{% endfor %}'
+		<div class="col-md-4 col-xl-3">
+			<div class="card bg-c-yellow order-card">
+				<div class="card-block">
+					<h6 class="m-b-20">Fee</h6>
+					<i class="fas fa-list-ol f-left"></i>
+					<p><span style="font-size: 20px;padding-left: 6px;">{{student.fee}}</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="update">
+		<a href="{% url 'admin_update_individual_student_info' student.id %}" class="updat btn btn-success">Update</a>
+		<form method="POST" id="deletestudentform">
+			{% csrf_token %}
+			<button id="deletestudent" class="updat btn btn-danger">Delete</button>
+		</form>
+	</div>
+</div>
+
+<div class="last-record-of-money">
+	<h3 style="color: #41532a;" id="calculated">TOTAL PAID:</h3>
+	{% for payment_record in payment_records %}
+		{% if forloop.first %}
+			<h3 style="color: #41532a;">BALANCE: {{payment_record.balance}}</h3>
+			<h3 class="areas">ARREARS: {{payment_record.debt}}</h3>
+		{% endif %}
+	{% endfor %}
+</div>
+
+<table class="table table-bordered">
+	<caption style="display: none;"></caption>
+	<thead>
+		<tr>
+			<th>Day</th>
+			<th>Canteen</th>
+			<th>Tuition</th>
+			<th>Bus</th>
+			<th>Balance</th>
+			<th>Debt</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for payment_record in payment_records %}
+		<tr>
+			<td ><strong>{{payment_record.date}}</strong></td>
+			{% if payment_record.canteen == None %}
+				<td ><strong>0</strong></td>
+			{% else %}
+				<td ><strong>{{payment_record.canteen|floatformat}}</strong></td>
+			{% endif %}
+				
+			{% if payment_record.school_fees == None %}
+				<td ><strong>0</strong></td>
+			{% else %}
+				<td ><strong>{{payment_record.school_fees|floatformat}}</strong></td>
+			{% endif %}
+
+			{% if payment_record.bus_fee == None %}
+				<td ><strong>0</strong></td>
+			{% else %}
+				<td ><strong>{{payment_record.bus_fee|floatformat}}</strong></td>
+			{% endif %}
+
+			{% if payment_record.balance == None %}
+				<td ><strong>0</strong></td>
+			{% else %}
+				<td ><strong>{{payment_record.balance|floatformat}}</strong></td>
+			{% endif %}
+			
+			{% if payment_record.debt == None %}
+				<td ><strong>0</strong></td>
+			{% else %}
+				<td ><strong>{{payment_record.debt|floatformat}}</strong></td>
+			{% endif %}
+
+			<form action="{% url 'admin_delete_payment_from_student_profile' payment_record.id %}" method="POST" class="deletepaymentform">
+				{% csrf_token %}
+				<td ><button class="delete-payment updat btn btn-danger" name="delete_payment">Delete</button></td>
+		</form>			
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>

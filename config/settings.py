@@ -27,7 +27,7 @@ DEBUG = DEBUG
 if DEBUG == True:
     DATABASES = DEVELOPMENT_DATABASES
 else:
-    ALLOWED_HOSTS = ['monalk.website', 'www.monalk.website']
+    ALLOWED_HOSTS = ['monalk.site', 'www.monalk.site']
     DATABASES = PRODUCTION_DATABASES
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True

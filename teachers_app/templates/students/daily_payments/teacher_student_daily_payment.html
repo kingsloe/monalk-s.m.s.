@@ -16,23 +16,23 @@
       <div class="form-content">
         <h1 class="student_name">{{student}}</h1>
         <div class="form-group">
-          <input type="number" step="any" name="pay" class="form-control" id="main_amount" onkeyup="calculate_fee()">
+          <input type="number" step="any" name="amount" class="form-control" id="main_amount" onkeyup="calculate_fee()">
         </div>
             {% if student.form_of_transportation == 'Bus' %}
             <div class="form-group">
               <p id="car_top"><b>Car Payment</b></p>
-              <input name="carpay" type="number" value="0" class="form-control" id="car" placeholder="Bus Fee" onkeyup="calculate_fee()" readonly>
+              <input name="bus_fee" type="number" value="0" class="form-control" id="car" placeholder="Bus Fee" onkeyup="calculate_fee()" readonly>
             </div>
             {% endif %}
             {% if student.payment_method == 'Pay_Per_Day' %}
             <div class="form-group">
               <p><b>School Fees Payment</b></p>
-              <input name="schoolfees" type="number" value="0" class="form-control" id="fees" placeholder="Daily School Fees" onkeyup="calculate_fee()" readonly>
+              <input name="school_fees" type="number" value="0" class="form-control" id="fees" placeholder="Daily School Fees" onkeyup="calculate_fee()" readonly>
             </div>
             {% endif %}
             <div class="form-group">
               <p><b>Date</b></p>
-              {% render_field payment_form.when_made class="form-control" placeholder="Date" %}
+              {% render_field payment_form.date class="form-control" placeholder="Date" %}
             </div>
             <div class="form-group">
               <p><b>Balance</b></p>
@@ -50,7 +50,7 @@
               </div>
               {% endif %}
             {% endfor %}
-  <div class="paybtn"><button type="submit" class="btn btn-success">Pay</button></div>
+  <div><button type="submit" class="btn btn-success">Pay</button></div>
       </div>
     </div>
   </div>

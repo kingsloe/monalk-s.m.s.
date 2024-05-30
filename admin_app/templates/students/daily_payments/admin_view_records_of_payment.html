@@ -4,46 +4,50 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
 
-<section class="hom"> 
-    <div class="text">
-    <input type="text" class="search form-control" placeholder="Search...">
-    <table class="table table-bordered border-primary results">
-        <thead class="stay">
+<input type="text" class="search form-control" placeholder="Search...">
+
+<div class="table-responsive"> 
+    <table class="table table-bordered results">
+      <caption style="display: none;"></caption>
+      <thead>
         <tr>    
-          <th class="tablestyle">Names</th>
-          <th class="tablestyle">Food Money</th>
-          <th class="tablestyle">Bus Money</th>
-          <th class="tablestyle">School Fees</th>
-          <th class="tablestyle">Date</th>
+          <th>Names</th>
+          <th>User</th>
+          <th>Amount</th>
+          <th>Canteen</th>
+          <th>Bus Fee</th>
+          <th>School Fees</th>
+          <th>Date</th>
         </tr>
       </thead>
       <tbody>
         {% for record in records.object_list %}
         <tr>
-          <td class="tablestyle">{{record.student}}</td>
-          {% if record.pay == None %}
-          <td class="tablestyle">0</td>
+          <td >{{record.student}}</td>
+          <td >{{record.user}}</td>
+          <td >{{record.amount}}</td>
+          {% if record.canteen == None %}
+          <td >0</td>
           {% else %}
-          <td class="tablestyle">{{record.pay|floatformat}}</td>
+          <td >{{record.canteen|floatformat}}</td>
           {% endif %}
-          {% if record.carpay == None %}
-          <td class="tablestyle">0</td>
+          {% if record.bus_fee == None %}
+          <td >0</td>
           {% else %}
-          <td class="tablestyle">{{record.carpay|floatformat}}</td>
+          <td >{{record.bus_fee|floatformat}}</td>
           {% endif %}
 
-          {% if record.schoolfees == None %}
-          <td class="tablestyle">0</td>
+          {% if record.school_fees == None %}
+          <td >0</td>
           {% else %}
-          <td class="tablestyle">{{record.schoolfees|floatformat}}</td>
+          <td >{{record.school_fees|floatformat}}</td>
           {% endif %}
-          <td class="tablestyle">{{record.when_made}}</td>
+          <td >{{record.date}}</td>
         </tr>
         {% endfor %}
       </tbody> 
     </table> 
-    </div>
-</section>
+  </div>
 <center>
     {%if records.has_previous %}
         <a href="?page={{records.previous_page_number}}"><button class="btn btn-success"><i>Previous</i></button></a> {# link to the prev page #}

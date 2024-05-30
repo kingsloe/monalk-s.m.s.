@@ -107,7 +107,7 @@ urlpatterns = [
     path('delete-student-<str:pk>-termly-payment',
          admin_delete_termly_paid_student_view, name='admin_delete_termly_paid_student'),
 
-    path('records-of-students-schoolfees-payment', admin_records_of_all_schoolfees_payment_view,
+    path('records-of-students-school_fees-payment', admin_records_of_all_schoolfees_payment_view,
          name='admin_records_of_all_schoolfees_payment'),
 
     path('students-with-debt', admin_students_with_debt_view,

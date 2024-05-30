@@ -4,9 +4,9 @@ import datetime
 
 
 class TermlyPaymentForm(forms.ModelForm):
-    when_made = forms.DateField(initial=datetime.date.today)
+    date = forms.DateField(initial=datetime.date.today)
 
     class Meta:
         model = SchoolFeesPayment
-        fields = ['student', 'schoolfees', 'when_made',
+        fields = ['student', 'school_fees', 'date',
                   'debt', 'troll', 'soap', 'broom']

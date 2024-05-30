@@ -4,12 +4,11 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tables.css' %}">
 
-<section class="hom"> 
-    <div class="text">
-        <input type="text" class="search form-control" placeholder="Search...">
-        <table class="table table-bordered border-primary results">
-            <caption style="display: none;"></caption>
-            <thead class="stay">
+<input type="text" class="search form-control" placeholder="Search...">
+<div class="table-responsive"> 
+  <table class="table table-bordered results">
+    <caption style="display: none;"></caption>
+    <thead>
                 <tr>
                 <th>Name</th>
                 <th>Class</th>
@@ -20,14 +19,13 @@
             <tbody class="results">
             {% for student in students %}
             <tr>
-                <td class="tablestyle"><strong><a href="{% url 'admin_view_individual_student_info' student.id %}" id="std_sty">{{student.get_name}}</a></strong></td>
-                <td class="tablestyle"><strong>{{student.grade}}</strong></td>
-                <td class="tablestyle"><strong>{{student.mobile}}</strong></td>
-                <td class="tablestyle"><strong>{{student.get_base_fee}}</strong></td>      
+                <td ><strong><a href="{% url 'admin_view_individual_student_info' student.id %}" id="std_sty">{{student.get_name}}</a></strong></td>
+                <td ><strong>{{student.grade}}</strong></td>
+                <td ><strong>{{student.mobile}}</strong></td>
+                <td ><strong>{{student.get_base_fee}}</strong></td>      
             </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>  
-</section>
 {% endblock content %}
